@@ -1,0 +1,30 @@
+{
+  "name": "final-project-ittalents",
+  "version": "1.0.0",
+  "description": "The project is to make a website which works like youtube",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "hbs": "~4.0.1",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StoyanTakov/final-project-ittalents.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StoyanTakov/final-project-ittalents/issues"
+  },
+  "homepage": "https://github.com/StoyanTakov/final-project-ittalents#readme"
+}
