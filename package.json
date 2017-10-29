@@ -2,21 +2,23 @@
   "name": "final-project-ittalents",
   "version": "1.0.0",
   "description": "The project is to make a website which works like youtube",
-  "main": "index.js",
+  "main": "server.js",
   "private": true,
   "dependencies": {
-    "body-parser": "~1.18.2",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "^4.15.5",
     "hbs": "~4.0.1",
+    "mongoose": "^4.12.4",
     "monk": "^6.0.5",
-    "morgan": "~1.9.0",
+    "morgan": "^1.9.0",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
