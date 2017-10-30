@@ -1,3 +1,6 @@
 header{
     height: 60px;
 }
+.related-vid{
+    border-left: 1px solid gray;
+}
