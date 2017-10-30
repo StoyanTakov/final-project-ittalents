@@ -4,3 +4,9 @@ header{
 .related-vid{
     border-left: 1px solid gray;
 }
+.video-func{
+    border-bottom: 1px solid gray;
+}
+.video-description{
+    border-bottom: 1px solid gray;
+}
