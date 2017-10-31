@@ -1,5 +1,5 @@
 angular.module('videoControllers',[])
-.controller('mainVideoController',function($scope){
+.controller('MainVideoController',function($scope){
     $scope.video = {
         id: "7lCDEYXw3mM",
         snippet: {
