@@ -1,4 +1,4 @@
-angular.module('userApp', ['appRoutes']).controller('VideoController',
+angular.module('userApp').controller('VideoController',
     function VideoController($scope) {
         var video = {
             id: "7lCDEYXw3mM",
