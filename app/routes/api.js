@@ -2,7 +2,7 @@ var User = require("../models/user")
 
 module.exports = function (router) {
 
-    // http://localhost:8080/users
+    // http://localhost:8080/api/users
     router.post('/users', function (req, res) {
         var user = new User();
         user.username = req.body.username;
