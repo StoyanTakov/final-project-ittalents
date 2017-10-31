@@ -6,7 +6,8 @@ angular.module('appRoutes', ['ngRoute'])
                 templateUrl: 'app/views/pages/home-page.html'
             })
             .when('/video', {
-                templateUrl: 'app/views/pages/video-page.html'
+                templateUrl: 'app/views/pages/video-page.html',
+                controller: "mainVideoController" 
             })
             .otherwise({
                 redirectTo: '/'
