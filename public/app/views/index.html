@@ -1,35 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tubata</title>
-
+    <!-- CSS links -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/bootstrap-social.css">
-
+    <!-- Angular js -->
     <script src="assets/js/angular.js"></script>
     <script src="assets/js/angular-route.js"></script>
+    <!-- Angular routes and app -->
     <script src="app/app.js"></script>
     <script src="app/routes.js"></script>
+    <!--Controllers -->
     <script src="app/controllers/videoController.js"></script>
-    
+    <script src="app/controllers/mainController.js"></script>
+
 </head>
+
 <body ng-app="userApp">
-    <nav>
-        <img src="" alt="nav-tab">
-        <img src="" alt="tubata">
-        <input type="text" id="search-bar">
-    </nav>
-  <div ng-view></div>
-  
-  
-  
-  
+    <div class="container col-md-12" ng-model="menuVisible" ng-controller="mainController">
+        <div>
+            <button ng-click="showMenu()">Menu</button>
+            <img src="" alt="tubata">
+            <input type="text" id="search-bar" ng-value="menuVisible">
+        </div>
+        <div ng-show="menuVisible" class="container col-md-2">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <hr>
+            <a href="">Library</a>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <hr>
+        </div>
+
+        <div ng-view class='col-md-10'></div>
+
+    </div>
+
+
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 </body>
+
 </html>
