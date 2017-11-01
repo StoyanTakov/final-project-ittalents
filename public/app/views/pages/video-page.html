@@ -15,15 +15,15 @@
                                 <h3>{{video.snippet.title}}</h3>
                             </div>
                         </div>
-                        
+
                         <div class="row action-row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <span>
                                     <p>
                                         <strong>Views:</strong> {{video.statistics.viewCount}}</p>
                                 </span>
                             </div>
-                            <div class="offset-md-6 col-md-1">
+                            <div class="col-md-offset-3 col-md-1">
                                 <span>
                                     <input type="image" src="https://www.shareicon.net/download/2015/10/17/657535_approve_512x512.png" id="like">
                                     <p>{{video.statistics.likeCount}}</p>
@@ -51,7 +51,7 @@
                         <p>
                             <strong>Published at</strong> {{video.snippet.publishedAt}}</p>
                     </div>
-                    <div class="offset-md-4 col-md-2">
+                    <div class="col-md-offset-4 col-md-2">
                         <button class="btn" type="">SUBSCRIBE</button>
                     </div>
                 </div>
@@ -61,6 +61,14 @@
                     </div>
                     <div class="col-md-1">
                         {{video.snippet.categoryId}}
+                    </div>
+                </div>
+                <div class="row tags">
+                    <div class="col-md-2">
+                        <p>Tags: </p>
+                    </div>
+                    <div class="col-md-1">
+                        {{video.snippet.tags}}
                     </div>
                 </div>
                 <div class="row video-description">
@@ -74,10 +82,10 @@
                     </div>
                 </div>
                 <div class="row video-description-text" ng-hide="showDescription">
-                        <div class="col-md-12" ng-hide="click">
-                            <p>{{video.snippet.description}}</p>
-                        </div>
+                    <div class="col-md-12" ng-hide="click">
+                        <p>{{video.snippet.description}}</p>
                     </div>
+                </div>
                 <div class="row video-comments">
                     <div class="container">
                         <div class="row">
@@ -107,20 +115,18 @@
             </section>
         </div>
         <div class="col-md-4">
-            <aside class="container related-vid">
-                <div class="row">
-                    <section class="col-md-7 col-md-offset-1 vid-pic">
-                        <a href="">
-                            <img src="" alt="vidPicture">
-                        </a>
-                    </section>
-                    <section class="col-md-3 vid-info">
-                        <p>VID NAME</p>
-                        <p>USER NAME</p>
-                        <p>NUMBER OF VIEWS</p>
-                    </section>
-                </div>
-            </aside>
+            <aside class="row related-vid">
+                <section class="col-md-5">
+                    <a href="">
+                        <img src={{video.snippet.thumbnails.default.url}} alt="vidPicture">
+                    </a>
+                </section>
+                <section class="col-md-4">
+                    <p>VID NAME</p>
+                    <p>USER NAME</p>
+                    <p>NUMBER OF VIEWS</p>
+                </section>
         </div>
+        </aside>
     </div>
 </div>
