@@ -23,28 +23,65 @@
                                         <strong>Views:</strong> {{video.statistics.viewCount}}</p>
                                 </span>
                             </div>
-                            <div class="col-md-3">
-                                
-                            </div>
                             <div class="col-md-1">
                                 <span>
-                                    <input type="image" src="https://www.shareicon.net/download/2015/10/17/657535_approve_512x512.png" id="like">
+                                    <button id="share-btn" class="btn">
+                                        <img src="https://www.shareicon.net/download/2015/10/17/657535_approve_512x512.png" id="like" alt="">
+
+                                    </button>
                                     <p>{{video.statistics.likeCount}}</p>
                                 </span>
                             </div>
                             <div class="col-md-1">
                                 <span>
-                                    <input type="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAflBMVEX///8AAAD8/PxYWFjR0dF5eXlOTk4hISHs7OxeXl739/fY2NhsbGzd3d329vbv7++SkpKbm5uDg4PJycmmpqZiYmIwMDC/v7+xsbFGRkZnZ2dycnLl5eVSUlIZGRltbW1AQEChoaG6uroQEBAlJSWJiYk4ODgsLCwTExMcHBx6TDcnAAAGL0lEQVR4nO2da1fiMBBA5SVvKFB5CQqoVf//H9wVgS1tHjNpmmRmc79y7MmVkmQmyeThIRKJRCKRSCQSiUQikUgkEolEIpFIJBKJREJiMDytZ53+Jvt87xZ5X2768/Q09t1GQwbTxXF+aIDYJO2J7/bi2C2S7RImd+Wl0/bdaijD9TbDyV05nHy3Xc84bZnJXciC/h6nq85bJb0znaZvDwm9db+63ZnlzreLgMn60ZLemYVvnwLTdGNTLzTFXcWeRcLQt9eFXrqvQ+8vX1Pfbg/Wf3sFHn3rTa31nDKOPvV2ad16P/R86bUT4Fy6Ks/u3ZqD9rGWjlMCeuAfnDqtRwD711n5BRkm2827Q7sf5kjBUxfx8OT+b3sufnclvnEB4wz39P3dF2hhPm0Camazxj59++9vd3W0HgKmr5niH7+6/XGdA7uSDBFHId/RH27v6dB+06EghkST6eP18Qb/HVuslFJ5miaPv2b4nmy3G86sXsNrwsTlIF8APiJSNeyzNzywN3xnb/gdDckb8n9LDxUNR+lqse5IH0/esH/J1zXnkscHYAgf8gWGuRj3JH56CIbgjFvZcJT/OBU+PAhDaBRcNhzcfS5cdwjD8GVQ1oEYftx/vhA9OwxDYKBfMix+96JHB2LYAO3TKBkWg2dRqikUwycrhqJUaCiGoC+xZFhMJ4seHIzhR1EHYri+/7wnenAwhktAd1oybN1/Lkw2BWMIWRAuj4d3nak4mxqOYSJQ0hq+5fqaptghHMO9UEpj2Mhunc1EsuwSjmHDyPDvd//7A17Lll0CMtSvJEoi4Gz0rNgJE5Chfj8f1Rj/SsreUJ/dp26oHy6ioZCADPW5DOqG/Hsa/UopdUP9ajd1Q60gdUNAMoq4YUspx8HwPxgt9F0NecOtUo+D4a0xfA1HSj8OhrpfIgNDTYjIwDBjb9hQb4nmYKiOLzgYqn+IHAzVy4gcDNVdDQfDLntD9S6+aCgkGjpGvROTg+GBvaE6COZgqM57czBUb1LkYKg+x8bAcKMU5GCoSZkyMOSfp9Fs32NgqNlxwsFQvW2IhaFyBYqFofI95WGoivJ5GBZ3NjM0VISITAwV26G5GMqPsnExXLI3lB8uYWMoXZ5hYyidf7MxlC7nszGUzk3ZGB5k2Ro2htJDXmwMP2Wr+U2TcmQB1BgqIT+oZ1JRLoA6USXkNT/FJ+6V3Or7jO031Bj5Yv4AU1Lwl3975eqqM2uAooqE8MS9itzsQXiG1g+KGFhW/EJGJ/+3w5d62otHeax7iCgO2C2ehA6kP5VHTxfH2bwDYJ6syjOHcdL/8u0HO7dehaH1wuRY6i9H73loBJxKqAy6S7aKk0LtPod/R8Whd54q7josRO+t5i68mGlVPL2odY8Uedo+BEF1eKyxci8Ir2RqB4NgrBrac0/WSdwKuvwNXnl26PfmrhfN466MecfThSyDbzd+I3936rgY+bOj1wt1zGfh+5aW/na+Xni/LvBoahjKZU56RoaG2MtHPGJ4p843rGJnCPQMQylVUjAwDHubT9/tRmA4fdMXnAkHw1uEvA8EcCafRoY+5tKmGIb8Idz+BwW5InIBUM8yHD6MFAn9Eg1X+uG35ATAxOjOOd+tRmEUSVEaE82yb/DrOYLgaKDoJ/1ijPwmECluk7zVMZi+ebtL1YwmPlgkFESdmaAX+nXFn4Jjh1b03WI0O+y+G12NsvDAXndJaub2C3JRSnN8OUiQyxm+m2sA8j0F3SETGFuUIbGJ2xncIj+1Mf8MavMbpYTUDdT92K++W2sC6uSD6y0WdnhFGLrYbWgfTLxP03DC3hDTm9L8HT7Irv0UQC2RcQGR5ne/m8sKiOypo22/thkswYak1mdywM+f6C9yChP4oQXgTbHBAd+/QDE+/AHe1fhuqTHQnBv8dvjQgGZrSAZPZ6BdDa0lxDzQ8IJqRwMOL158t7MCsK6G0C7MErDwgu5LChzziYZOv4DO/9PZDC0C8JrSHQzPACZudLZCi9FuXCCZ0M+jW78gGt3nUWfcNuri1SRQ7qzlIKjsTkcsBBUJKfKdzBXJiPFBfZjIIVjUP/g9b2edcXan95jQnqgJWT19NRpv3ayfpO063s4/u4CHLYlDyHoAAAAASUVORK5CYII="
-                                        id="dislike">
+                                    <button id="share-btn" class="btn">
+                                        <img src="data:image/png;base64,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"
+                                            id="dislike" alt="">
+                                    </button>
                                     <p>{{video.statistics.dislikeCount}}</p>
                                 </span>
                             </div>
                             <div class="col-md-2">
                                 <span>
-                                   <button id="share-btn" class="btn">
-                                       <img src="http://www.iconarchive.com/download/i90008/icons8/windows-8/Arrows-Redo.ico" id="share" alt="">SHARE
-                                   </button>
+                                    <button id="share-btn" class="btn" ng-click="showShareMenu()">
+                                        <img src="http://www.iconarchive.com/download/i90008/icons8/windows-8/Arrows-Redo.ico" id="share" alt="">SHARE
+                                    </button>
                                 </span>
+                            </div>
+                        </div>
+                        <div class="row share-block" ng-hide="shareMenu">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <p>Share</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1 image-container">
+                                        <a class="btn btn-social-icon btn-lg btn-facebook"></a>
+                                    </div>
+                                    <div class="col-md-1 image-container">
+                                        <a class="btn btn-social-icon btn-lg btn-google">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-1 image-container">
+                                        <a class="btn btn-social-icon btn-lg btn-instagram">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-1 image-container">
+                                        <a class="btn btn-social-icon btn-lg btn-twitter">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-1 image-container">
+                                        <a class="btn btn-social-icon btn-lg btn-pinterest">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <input class="form-control" id="focusedInput" type="text" value="youtube url">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -102,9 +139,9 @@
                     </div>
                     <div class="container">
                         <div class="row comment-write">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <img src="" alt="user-pic">
-                                <input type="textbox">
+                                <textarea class="form-control" rows="3" id="textArea"></textarea>
                                 <button class="btn">CANCEL</button>
                                 <button class="btn">COMMENT</button>
                             </div>

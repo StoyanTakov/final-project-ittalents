@@ -31,3 +31,9 @@ header{
 #published{
     color: gray;
 }
+#focusedInput{
+    border: none;
+}
+.btn{
+    margin: 1em 0 1em 0;
+}
