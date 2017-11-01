@@ -13,6 +13,9 @@ header{
 .row{
     margin-top: 1.5em;
 }
+.title{
+    margin-top: -1.5em!important;
+}
 #share{
     width: 20px;
 }
