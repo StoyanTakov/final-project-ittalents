@@ -7,8 +7,8 @@ header{
 .video-func{
     border-bottom: 1px solid gray;
 }
-.video-description{
-    border-bottom: 1px solid gray;
+.video-comments{
+    border-top: 1px solid gray;
 }
 .row{
     margin-top: 1em;
@@ -27,4 +27,7 @@ header{
 }
 .title{
     margin-top: 0em;
+}
+#published{
+    color: gray;
 }
