@@ -10,3 +10,21 @@ header{
 .video-description{
     border-bottom: 1px solid gray;
 }
+.row{
+    margin-top: 1em;
+}
+#share-icon{
+    width: 20px;
+}
+#share-btn{
+    background-color: transparent;
+}
+#like{
+    width: 20px;
+}
+#dislike{
+    width: 20px;
+}
+.title{
+    margin-top: 0em;
+}
