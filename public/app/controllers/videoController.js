@@ -42,4 +42,13 @@ angular.module('videoControllers', [])
             }
 
         }
+        $scope.shareMenu = true;
+        $scope.showShareMenu = showShareMenu;
+        function showShareMenu() {
+            if ($scope.shareMenu == true) {             
+                $scope.shareMenu = false;
+            } else {
+                $scope.shareMenu = true;
+            }
+        }
     })

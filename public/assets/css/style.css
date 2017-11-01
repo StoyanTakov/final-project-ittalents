@@ -13,6 +13,9 @@ header{
 .row{
     margin-top: 1.5em;
 }
+.title{
+    margin-top: -1.5em!important;
+}
 #share{
     width: 20px;
 }
@@ -30,4 +33,10 @@ header{
 }
 #published{
     color: gray;
+}
+#focusedInput{
+    border: none;
+}
+.btn{
+    margin: 1em 0 1em 0;
 }
