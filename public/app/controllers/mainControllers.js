@@ -10,8 +10,15 @@ angular.module('mainControllers',[])
         }
     })
     .controller('LoginController',function(){
-
+        
     })
-    .controller('RegisterController',function(){
+    .controller('RegisterController',function($http){
 
+        this.regUser = function(event,regData){
+            event.preventDefault();
+            $http.post('/api/users',this.regData).then(function(data){
+                console.log(data);
+            })
+            console.log(this.regData) 
+        }
     })
