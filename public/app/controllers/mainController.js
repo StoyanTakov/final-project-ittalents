@@ -1,5 +1,6 @@
-angular.module('mainControllers',['userServices'])
-    .controller('MainController',function($scope){
+angular.module('mainController',['authServices'])
+    .controller('mainController',function($scope,Auth,$timeout,$location){
+        // Showing hiding menu
         $scope.menuVisible = false;
         $scope.showMenu = function(){
            if ($scope.menuVisible) {
@@ -8,18 +9,13 @@ angular.module('mainControllers',['userServices'])
             $scope.menuVisible = true;
            }
         }
-    })
-    .controller('LoginController',function(){
-        
-    })
-    .controller('RegisterController',function($http,$location,$timeout,User){
+        // Login
         var app = this;
-       
-        app.regUser = function(event,regData){
+        app.doLogin = function(event,loginData){
             event.preventDefault();
             app.loading = true;
             app.errorMsg = false;
-            User.create(app.regData).then(function(data){
+            Auth.login(app.loginData).then(function(data){
                 if (data.data.success) {
                     app.loading = false;
                     // Success message
@@ -36,3 +32,7 @@ angular.module('mainControllers',['userServices'])
             })
         }
     })
+   
+   
+    
+    

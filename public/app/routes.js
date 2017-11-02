@@ -7,16 +7,15 @@ angular.module('appRoutes', ['ngRoute'])
             })
             .when('/video', {
                 templateUrl: 'app/views/pages/video-page.html',
-                controller: "MainVideoController" 
+                controller: "mainVideoController" 
             })
             .when('/register',{
                 templateUrl: 'app/views/pages/users/register.html',
-                controller: 'RegisterController',
+                controller: 'registerController',
                 controllerAs: "register"
             })
             .when('/login',{
                 templateUrl: 'app/views/pages/users/login.html',
-                controller: 'LoginController'
             })
             .when('/upload',{
                 templateUrl: 'app/views/pages/upload-video.html',

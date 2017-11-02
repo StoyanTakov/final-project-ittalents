@@ -20,13 +20,16 @@
     <script src="app/app.js"></script>
     <script src="app/routes.js"></script>
     <!--Controllers -->
-    <script src="app/controllers/videoControllers.js"></script>
-    <script src="app/controllers/mainControllers.js"></script>
+    <script src="app/controllers/mainController.js"></script>
+    <script src="app/controllers/mainVideoController.js"></script>
+    <script src="app/controllers/registerController.js"></script>
     <!-- Services -->
     <script src="app/services/userServices.js"></script>
+    <script src="app/services/authServices.js"></script>
+
 </head>
 
-<body ng-app="userApp" ng-controller="MainController">
+<body ng-app="userApp" ng-controller="mainController as main">
     <nav class="navbar">
         <div class="container-fluid">
             <div >
