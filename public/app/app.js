@@ -1,2 +1,2 @@
 angular.module('userApp', ['appRoutes',"mainVideoController",'mainController',
-'registerController','userServices','authServices','ngAnimate']);
+'registerController','userServices','authServices','ngAnimate','updateControllers']);

@@ -1,4 +1,4 @@
 angular.module('updateControllers', [])
-    .controller('UploadVideoController', function ($scope) {
+    .controller('uploadVideoController', function ($scope) {
 
     })
