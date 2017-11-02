@@ -49,7 +49,6 @@ header{
 .btn{
     margin: 1em 0 1em 0;
 }
-<<<<<<< HEAD
 #upload-form{
     border-radius: 1em;
     background-color:rgb(243, 187, 91);
@@ -57,7 +56,6 @@ header{
 #upload-btn{
     margin-bottom: 1em;
 }
-=======
 /* Register css */
 .show-hide-message.ng-hide-remove{
     -webkit-animation: zoomIn 0.3s both ease;
@@ -85,4 +83,3 @@ header{
     from { -moz-transform: rotate(0deg); }
     to { -moz-transform: rotate(360deg); }
 }
->>>>>>> eac63f8a4b90fdb3310ab94261902d599180be1d
