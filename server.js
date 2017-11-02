@@ -1,22 +1,22 @@
-var express = require("express");
-var app = express();
-var port = process.env.PORT || 8080;
-var morgan = require("morgan");
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-var router = express.Router();
-var appRoutes = require('./app/routes/api')(router);
-var path = require('path');
+var express       = require("express");
+var app           = express();
+var port          = process.env.PORT || 8080;
+var morgan        = require("morgan");
+var mongoose      = require("mongoose");
+var bodyParser    = require("body-parser");
+var router        = express.Router();
+var appRoutes     = require('./app/routes/api')(router);    //Setting the routers
+var path          = require('path');
+
+// MIDDLEWARES
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(express.static(__dirname + '/public'));
-app.use('/api',appRoutes);
+app.use(bodyParser.urlencoded( { extended: true }));
+app.use(express.static(__dirname + '/public'));         //Setting the default url for the front-end
+app.use('/api',appRoutes);                              //Setting a url for the connection with the back-end in case of matched url's
 
-
+//Connecting to the database with mongoose
 mongoose.connect('mongodb://localhost:27017/youtubedb', function (err) {
   if (err) {
     console.log("Not connected to the database.");
@@ -25,7 +25,9 @@ mongoose.connect('mongodb://localhost:27017/youtubedb', function (err) {
   }
 });
 
-app.get('*',function(req,res){
+//Responding with the index.html when entering the website
+
+app.get('*',function(req,res){                                          
   res.sendFile(path.join(__dirname + "/public/app/views/index.html"));
 })
 
