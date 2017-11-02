@@ -1,24 +1,24 @@
 angular.module('appRoutes', ['ngRoute'])
 
-    .config(function ($routeProvider,$locationProvider) {
+    .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'app/views/pages/home-page.html'
             })
             .when('/video', {
                 templateUrl: 'app/views/pages/video-page.html',
-                controller: "MainVideoController" 
+                controller: "MainVideoController"
             })
-            .when('/register',{
+            .when('/register', {
                 templateUrl: 'app/views/pages/users/register.html',
                 controller: 'RegisterController',
                 controllerAs: "register"
             })
-            .when('/login',{
+            .when('/login', {
                 templateUrl: 'app/views/pages/users/login.html',
                 controller: 'LoginController'
             })
-            .when('/upload',{
+            .when('/upload', {
                 templateUrl: 'app/views/pages/users/upload-video.html',
                 controller: 'UploadVideoController'
             })
