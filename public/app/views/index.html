@@ -18,38 +18,78 @@
     <script src="app/app.js"></script>
     <script src="app/routes.js"></script>
     <!--Controllers -->
-    <script src="app/controllers/videoController.js"></script>
+    <script src="app/controllers/videoControllers.js"></script>
     <script src="app/controllers/mainController.js"></script>
 
 </head>
 
-<body ng-app="userApp">
-    <div class="container col-md-12" ng-model="menuVisible" ng-controller="mainController">
-        <div>
-            <button ng-click="showMenu()">Menu</button>
-            <img src="" alt="tubata">
-            <input type="text" id="search-bar" ng-value="menuVisible">
-        </div>
-        <div ng-show="menuVisible" class="container col-md-2">
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <hr>
-            <a href="">Library</a>
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <hr>
-        </div>
+<body ng-app="userApp" ng-controller="MainController">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">
+                            <img ng-click="showMenu()" id='menu-btn' src="../assets/img/menu-button.png" alt="menu">
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a ng-href="/">Tubata</a>
+                    </li>
 
-        <div ng-view class='col-md-10'></div>
-
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <img src="../assets/img/upload-btn.png" alt="upload">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../assets/img/bell-btn.png" alt="bell">
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-href="#">
+                            <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container col-md-2" ng-show="menuVisible">
+        <div class='row'>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">
+                        <img ng-click="showMenu()" id='menu-btn' src="../assets/img/menu-button.png" alt="menu">
+                    </a>
+                </li>
+                <li class="active">
+                    <a ng-href="/">Tubata</a>
+                </li>
+            </ul>
+        </div>
+        <ul>
+            <li>Начало</li>
+            <li>Набиращи популярност</li>
+            <li>Абонаменти</li>
+        </ul>
+        <a href="">Библиотека</a>
+        <ul>
+            <li>История</li>
+            <li>За гледане по-късно</li>
+            <li>Харесани видеоклипове</li>
+        </ul>
+        <a href="">Абонаменти</a>
+        <br>
+        <a href="">Сърфиране на канала</a>
+        <ul>
+            <li><a href="">Настройки</a></li>
+            <li><a href="">Помощ</a></li>
+        </ul>
     </div>
-
+    <div ng-view class='col-md-10'></div>
 
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

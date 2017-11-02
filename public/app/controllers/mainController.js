@@ -1,5 +1,5 @@
 angular.module('mainController',[])
-    .controller('mainController',function($scope){
+    .controller('MainController',function($scope){
         $scope.menuVisible = false;
         $scope.showMenu = function(){
            if ($scope.menuVisible) {
