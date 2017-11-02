@@ -1,4 +1,4 @@
-angular.module('mainController',[])
+angular.module('mainControllers',[])
     .controller('MainController',function($scope){
         $scope.menuVisible = false;
         $scope.showMenu = function(){
@@ -8,4 +8,10 @@ angular.module('mainController',[])
             $scope.menuVisible = true;
            }
         }
+    })
+    .controller('LoginController',function(){
+
+    })
+    .controller('RegisterController',function(){
+
     })

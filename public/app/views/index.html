@@ -19,14 +19,14 @@
     <script src="app/routes.js"></script>
     <!--Controllers -->
     <script src="app/controllers/videoControllers.js"></script>
-    <script src="app/controllers/mainController.js"></script>
+    <script src="app/controllers/mainControllers.js"></script>
 
 </head>
 
 <body ng-app="userApp" ng-controller="MainController">
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="myNavbar">
+            <div >
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="#">
@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a ng-href="/">Tubata</a>
+                        <a href="/">Tubata</a>
                     </li>
 
                 </ul>
@@ -50,9 +50,13 @@
                         </a>
                     </li>
                     <li>
-                        <a ng-href="#">
+                        <a href="/login">
                             <span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
+                    <li>
+                            <a href="/register">
+                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Register</a>
+                        </li>
                 </ul>
             </div>
         </div>

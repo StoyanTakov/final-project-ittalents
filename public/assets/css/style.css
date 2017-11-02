@@ -1,11 +1,11 @@
 /* main page css */
 a>img{
     width: 20px;
+    opacity: 0.6;
 }
-a>img:hover{
-    background-color: white;
+nav.navbar{
+    background-color: lightblue;
 }
-
 /* video page css */
 header{
     height: 60px;

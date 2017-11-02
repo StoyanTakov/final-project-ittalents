@@ -1,1 +1,1 @@
-angular.module('userApp', ['appRoutes',"videoControllers",'mainController']);
+angular.module('userApp', ['appRoutes',"videoControllers",'mainControllers']);

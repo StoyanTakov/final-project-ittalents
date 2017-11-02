@@ -9,6 +9,14 @@ angular.module('appRoutes', ['ngRoute'])
                 templateUrl: 'app/views/pages/video-page.html',
                 controller: "MainVideoController" 
             })
+            .when('/register',{
+                templateUrl: 'app/views/pages/register.html',
+                controller: 'RegisterController'
+            })
+            .when('/login',{
+                templateUrl: 'app/views/pages/login.html',
+                controller: 'LoginController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
