@@ -10,11 +10,12 @@ angular.module('appRoutes', ['ngRoute'])
                 controller: "MainVideoController" 
             })
             .when('/register',{
-                templateUrl: 'app/views/pages/register.html',
-                controller: 'RegisterController'
+                templateUrl: 'app/views/pages/users/register.html',
+                controller: 'RegisterController',
+                controllerAs: "register"
             })
             .when('/login',{
-                templateUrl: 'app/views/pages/login.html',
+                templateUrl: 'app/views/pages/users/login.html',
                 controller: 'LoginController'
             })
             .otherwise({

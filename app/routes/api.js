@@ -10,13 +10,13 @@ module.exports = function (router) {
         user.email = req.body.email;
         if (req.body.username == null || req.body.username == '' || req.body.email == null ||
             req.body.password == null || req.body.password == '' || req.body.email == '') {
-            res.send("Ensure username, email and password were priveded.");
+            res.json({success: false, message: "Ensure username, email and password were provided."})
         } else {
             user.save(function (err) {
                 if (err) {
-                    res.send("Username or email already exists.");
+                    res.json({success: false, message: "Username or email already exists."});
                 } else {
-                    res.send("user created.");
+                    res.json({success: true, message: 'User created!'})
                 }
             });
         }
