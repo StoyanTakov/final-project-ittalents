@@ -49,3 +49,10 @@ header{
 .btn{
     margin: 1em 0 1em 0;
 }
+#upload-form{
+    border-radius: 1em;
+    background-color:rgb(243, 187, 91);
+}
+#upload-btn{
+    margin-bottom: 1em;
+}

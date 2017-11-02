@@ -1,1 +1,1 @@
-angular.module('userApp', ['appRoutes',"videoControllers",'mainControllers']);
+angular.module('userApp', ['appRoutes',"videoControllers",'mainControllers','uploadVideoControllers']);

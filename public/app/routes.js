@@ -19,8 +19,8 @@ angular.module('appRoutes', ['ngRoute'])
                 controller: 'LoginController'
             })
             .when('/upload',{
-                templateUrl: 'app/views/pages/upload-video.html',
-                controller: 'uploadVideoController'
+                templateUrl: 'app/views/pages/users/upload-video.html',
+                controller: 'UploadVideoController'
             })
             .otherwise({
                 redirectTo: '/'
