@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row picure">
+        <div class="col-md-12 backgroundPic">
+            <div class="col-md-2">
+                <img src="https://d2ln1xbi067hum.cloudfront.net/assets/default_user-abdf6434cda029ecd32423baac4ec238.png" id="user-pic" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-8 col-md-2">
+            <button class="btn btn-primary">Change Profie Pic</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary">Change Background</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>{{main.username}}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <button class="btn">Home</button>
+        </div>
+        <div class="col-md-1">
+            <button class="btn">Videos</button>
+        </div>
+        <div class="col-md-1">
+            <button class="btn">Playlists</button>
+        </div>
+    </div>
+    <div class="row home profile-navigation" ng-hide="showHome" ng-click="hideHome()">
+        <h1>Home</h1>
+    </div>
+    <div class="row videos profile-navigation" ng-hide="showVideos" ng-click="showAllVideos()">
+        <h1>videos</h1>
+    </div>
+    <div class="row playlists profile-navigation" ng-hide="showPlaylist" ng-click="showPlaylists()">
+        <div class="col-md-4">
+            <p>Create New Playlist :
+                <button class="btn">
+                    +add playlist</button>
+            </p>
+        </div>
+    </div>
+</div>
