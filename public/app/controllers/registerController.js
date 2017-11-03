@@ -13,6 +13,9 @@ angular.module('registerController',['userServices'])
                 app.successMsg = data.data.message+'...redirecting to home page.';
                 // Redirect to home page with a 2 second delay
                 $timeout(function(){
+                    //Clearing the data for the registration form
+                    app.regData = '';
+                    app.successMsg = false;
                     $location.path('/');
                 },2000)
             }else{

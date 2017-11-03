@@ -52,6 +52,27 @@ module.exports = function (router) {
             }
         })
     });
+    // Using middleware to check for a token
+    router.use(function(req,res,next){
+        var token = req.body.token || req.body.query || req.headers['x-access-token'];
 
+        if (token) {
+            //verify token
+            jwt.verify(token, secret, function(err,decoded){
+                if (err) {
+                    res.json({ success:false, message: 'Token invalid' });
+                }else{
+                    req.decoded = decoded;           // Making the the decoded token accessible in the next post
+                    next();
+                }
+            })
+        }else{
+            res.json({success: false, message: "No token provided."})
+        }
+    })
+
+    router.post('/me',function(req,res){
+        res.send(req.decoded)
+    })
     return router;
 }

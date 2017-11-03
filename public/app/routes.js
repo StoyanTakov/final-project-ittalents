@@ -21,6 +21,9 @@ angular.module('appRoutes', ['ngRoute'])
                 templateUrl: 'app/views/pages/users/upload-video.html',
                 controller: 'uploadVideoController'
             })
+            .when('/logout', {
+                templateUrl: 'app/views/pages/users/logout.html',
+            })
             .otherwise({
                 redirectTo: '/'
             });

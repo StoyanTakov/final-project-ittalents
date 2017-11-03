@@ -30,10 +30,10 @@
 
 </head>
 
-<body ng-app="userApp" ng-controller="mainController as main">
+<body ng-app="userApp" ng-controller="mainController as main" ng-show="loadMe" ng-cloak>
     <nav class="navbar">
         <div class="container-fluid">
-            <div >
+            <div>
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="#">
@@ -47,7 +47,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">
+                        <a href="/upload">
                             <img src="../assets/img/upload-btn.png" alt="upload">
                         </a>
                     </li>
@@ -56,14 +56,21 @@
                             <img src="../assets/img/bell-btn.png" alt="bell">
                         </a>
                     </li>
-                    <li>
+                    <li ng-hide="main.isLoggedIn">
                         <a href="/login">
-                            <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                            <span class="glyphicon glyphicon-log-in" ></span> Login</a>
                     </li>
-                    <li>
-                            <a href="/register">
-                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Register</a>
+                    <li ng-hide="main.isLoggedIn">
+                        <a href="/register">
+                            <span class="glyphicon glyphicon-circle-arrow-right" ></span> Register</a>
+                    </li>
+                    <li ng-show="main.isLoggedIn">
+                            <a href="#" >{{ main.username }}</a>
                         </li>
+                    <li ng-show="main.isLoggedIn" ng-click="main.logout()">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-log-out" ></span> Logout</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -96,8 +103,12 @@
         <br>
         <a href="">Сърфиране на канала</a>
         <ul>
-            <li><a href="">Настройки</a></li>
-            <li><a href="">Помощ</a></li>
+            <li>
+                <a href="">Настройки</a>
+            </li>
+            <li>
+                <a href="">Помощ</a>
+            </li>
         </ul>
     </div>
     <div ng-view class='col-md-10'></div>
