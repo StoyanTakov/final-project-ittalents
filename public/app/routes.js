@@ -23,7 +23,8 @@ angular.module('appRoutes', ['ngRoute'])
             })
             .when('/upload', {
                 templateUrl: 'app/views/pages/users/upload-video.html',
-                controller: 'uploadVideoController'
+                controller: 'uploadVideoController',
+                controllerAs: 'up'
             })
             .when('/logout', {
                 templateUrl: 'app/views/pages/users/logout.html',
