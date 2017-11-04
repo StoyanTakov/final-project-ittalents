@@ -20,9 +20,9 @@ angular.module('updateControllers', ['ngFileUpload'])
                 console.log('Error status: ' + resp.status);
                 $window.alert('Error status: ' + resp.status);
             }, function (evt) {
-                console.log(evt);
+                // console.log(evt);
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
                 self.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
             });
         };
