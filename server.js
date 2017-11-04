@@ -21,7 +21,7 @@ app.use('/api', appRoutes);    //Setting a url for the connection with the back-
 //multers disk storage settings,  destination path to save our files, rename our file, 
 var storage = multer.diskStorage({ 
   destination: function (req, file, cb) {
-    cb(null, './uploads/')
+    cb(null, '/uploads/')
   },
   filename: function (req, file, cb) {
     var datetimestamp = Date.now();
@@ -37,7 +37,7 @@ var upload = multer({
 
 
 // API path that will upload the files; check if there was an error while performing upload
-app.post('/upload', function (req, res) {
+app.post('/uploads', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
       res.json({ error_code: 1, err_desc: err });

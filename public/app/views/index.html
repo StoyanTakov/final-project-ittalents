@@ -16,6 +16,9 @@
     <script src="assets/js/angular.js"></script>
     <script src="assets/js/angular-route.js"></script>
     <script src="assets/js/angular-animate.js"></script>
+    <!-- ng-file-upload -->
+    <script src="assets/js/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="assets/js/ng-file-upload.min.js"></script>
     <!-- Angular routes and app -->
     <script src="app/app.js"></script>
     <script src="app/routes.js"></script>
@@ -59,18 +62,18 @@
                     </li>
                     <li ng-hide="main.isLoggedIn">
                         <a href="/login">
-                            <span class="glyphicon glyphicon-log-in" ></span> Login</a>
+                            <span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
                     <li ng-hide="main.isLoggedIn">
                         <a href="/register">
-                            <span class="glyphicon glyphicon-circle-arrow-right" ></span> Register</a>
+                            <span class="glyphicon glyphicon-circle-arrow-right"></span> Register</a>
                     </li>
                     <li ng-show="main.isLoggedIn">
-                            <a href="#" >{{ main.username }}</a>
-                        </li>
+                        <a href="#">{{ main.username }}</a>
+                    </li>
                     <li ng-show="main.isLoggedIn" ng-click="main.logout()">
                         <a href="#">
-                            <span class="glyphicon glyphicon-log-out" ></span> Logout</a>
+                            <span class="glyphicon glyphicon-log-out"></span> Logout</a>
                     </li>
                 </ul>
             </div>
