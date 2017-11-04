@@ -55,6 +55,7 @@ header{
 }
 #upload-btn{
     margin-bottom: 1em;
+    display: none;
 }
 /* Register css */
 .show-hide-message.ng-hide-remove{
