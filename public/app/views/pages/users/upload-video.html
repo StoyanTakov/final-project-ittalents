@@ -13,7 +13,7 @@
                    accept="video/*" 
                    ngf-max-size="1GB" 
                    />
-                Video thumbnail: <img style="width:100px;" ngf-thumbnail="up.file || 'https://i.ytimg.com/vi/T0Jqdjbed40/mqdefault.jpg'"/>
+                Video thumbnail: <video controls ngf-src="file" ngf-thumbnail="up.file || 'https://i.ytimg.com/vi/T0Jqdjbed40/mqdefault.jpg'"></video>
                 <i ng-show="up.upload_form.file.$error.required">*required</i><br>
                 <i ng-show="up.upload_form.file.$error.maxSize">File too large 
                 {{up.file.size / 1000000|number:1}}MB: max 1GB</i>
