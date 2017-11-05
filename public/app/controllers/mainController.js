@@ -1,5 +1,5 @@
 angular.module('mainController', ['authServices'])
-    .controller('mainController', function ($scope, Auth, $timeout, $location, $rootScope) {
+    .controller('mainController', function ($scope, Auth, $timeout, $location, $rootScope, $window) {
         // Showing hiding menu
         $scope.menuVisible = false;
         $scope.showMenu = function () {
@@ -9,12 +9,14 @@ angular.module('mainController', ['authServices'])
                 $scope.menuVisible = true;
             }
         }
+
+
         //Adding a variable to make the angular to load only when it's checking for the user
         //and using ng-cloak in the index.html
         $scope.loadMe = false;
         // Watching for changes in the routes when we check for the user if he is logged in
-        $rootScope.$on('$routeChangeStart',function(){
-         //Checking if the user is logged in and using the username
+        $rootScope.$on('$routeChangeStart', function () {
+            //Checking if the user is logged in and using the username
             if (Auth.isLoggedIn()) {
                 Auth.getUser().then(function (data) {
                     app.isLoggedIn = true;
@@ -22,15 +24,23 @@ angular.module('mainController', ['authServices'])
                     $scope.loadMe = true;
                 });
             } else {
-                app.username = '';
                 app.isLoggedIn = false;
                 $scope.loadMe = true;
+            }
+            if ($location.hash()=='_=_') { //Removing the additional url signs from facebook
+                $location.hash(null);
             }
         })
         // Login
         var app = this;
 
-
+        app.google = function () {
+            $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/google';
+        }
+        app.facebook = function(){
+                                  // http:                             //localhost:8080
+            $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/facebook';
+        }
         //Login function
         app.doLogin = function (event, loginData) {
             event.preventDefault();
@@ -45,7 +55,7 @@ angular.module('mainController', ['authServices'])
                     $timeout(function () {
                         //Clearing the data for the login form
                         app.successMsg = false;
-                        app.loginData = '';
+                        app.loginData = {};
                         $location.path('/');
                         app.loggedIn = true;
                     }, 1000)
@@ -59,6 +69,7 @@ angular.module('mainController', ['authServices'])
         //Logging out function with a delay and redirection to the main page
         app.logout = function () {
             Auth.logout();
+            // app.fbLogout();
             $location.path('/logout');
             $timeout(function () {
                 $location.path('/');

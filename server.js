@@ -8,9 +8,11 @@ var bodyParser    = require("body-parser");
 var router        = express.Router();
 var appRoutes     = require('./app/routes/api')(router);    //Setting the routers
 var path          = require('path');
+var passport      = require('passport');
+var social        = require('./app/passport/passport')(app,passport);
 
 // MIDDLEWARES
-//allow cross origin requests
+//allow cross origin requests for the uploads
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

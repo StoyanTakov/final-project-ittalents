@@ -29,6 +29,26 @@ angular.module('appRoutes', ['ngRoute'])
             .when('/logout', {
                 templateUrl: 'app/views/pages/users/logout.html',
             })
+            .when('/facebook/:token',{
+                templateUrl: 'app/views/pages/users/social/social.html',
+                controller: 'facebookController',
+                controllerAs: 'facebook'
+            })
+            .when('/facebookerror',{
+                templateUrl: 'app/view/pages/users/login.html',
+                controller: 'facebookController',
+                controllerAs: 'facebook'
+            })
+            .when('/google/:token',{
+                templateUrl: 'app/views/pages/users/social/social.html',
+                controller: 'googleController',
+                controllerAs: 'google'
+            })
+            .when('/googleerror',{
+                templateUrl: 'app/view/pages/users/login.html',
+                controller: 'googleController',
+                controllerAs: 'google'
+            })
             .otherwise({
                 redirectTo: '/'
             });

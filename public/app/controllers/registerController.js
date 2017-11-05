@@ -26,3 +26,22 @@ angular.module('registerController',['userServices'])
         })
     }
 })
+.controller('facebookController',function($routeParams,Auth,$location,$window){
+    var app = this;
+    if ($window.location.pathname == '/facebookerror') {
+        app.errorMsg = 'Facebook email not found in database.';
+    }else{
+        Auth.facebook($routeParams.token);
+        $location.path('/')
+    }
+    
+})
+.controller('googleController', function ($routeParams, Auth, $location, $window) {
+    var app = this;
+    if ($window.location.pathname == '/googleerror') {
+        app.errorMsg = 'Google email not found in database.'
+    } else {
+        Auth.google($routeParams.token);
+        $location.path('/');
+    }
+})
