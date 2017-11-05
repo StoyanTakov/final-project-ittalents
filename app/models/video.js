@@ -3,9 +3,8 @@ var Schema = mongoose.Schema;
 
 
 var VideoSchema = new Schema({
-    file: {
+    url: {
         type: String,
-        lowercase: true,
         required: true,
         unique: true
     },
@@ -56,6 +55,5 @@ var VideoSchema = new Schema({
     }
 });
 
-
-
+W
 module.exports = mongoose.model("Video", VideoSchema);

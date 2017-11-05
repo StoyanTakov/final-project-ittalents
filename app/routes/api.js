@@ -1,4 +1,5 @@
 var User = require("../models/user"); //Adding user model
+var Video = require("../models/video");//Adding video model
 var jwt = require('jsonwebtoken'); //Adding token 
 var secret = 'harambe'; //Secret word for the token
 var multer = require('multer');
