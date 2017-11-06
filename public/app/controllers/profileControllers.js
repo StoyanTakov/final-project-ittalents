@@ -5,7 +5,9 @@ angular.module('profileControllers', [])
         $scope.hideHome = hideHome;
         function hideHome() {
             if ($scope.showHome == false) {
+                $scope.showVideos = false;
                 $scope.showHome = true;
+                $scope.showPlaylist = true;
             } else {
                 $scope.showHome = false;
             }
@@ -15,6 +17,8 @@ angular.module('profileControllers', [])
         function showAllVideos() {
             if ($scope.showVideos == true) {
                 $scope.showVideos = false;
+                $scope.showHome = true;
+                $scope.showPlaylist = true;
             } else {
                 $scope.showVideos = true;
             }
@@ -24,6 +28,8 @@ angular.module('profileControllers', [])
         function showPlaylists() {
             if ($scope.showPlaylist == true) {
                 $scope.showPlaylist = false;
+                $scope.showVideos = true;
+                $scope.showHome = true;
             } else {
                 $scope.showPlaylist = true;
             }
