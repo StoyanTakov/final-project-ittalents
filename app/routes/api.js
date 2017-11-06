@@ -1,5 +1,5 @@
 var User = require("../models/user"); //Adding user model
-var Video = require("../models/video");//Adding video model
+var Video = require("../models/video"); //Adding video model
 var jwt = require('jsonwebtoken'); //Adding token 
 var secret = 'harambe'; //Secret word for the token
 var multer = require('multer');
@@ -10,27 +10,55 @@ module.exports = function (router) {
     // User registration route
     router.post('/users', function (req, res) {
         var user = new User();
+        user.name = req.body.name;
         user.username = req.body.username;
         user.password = req.body.password;
-        user.email = req.body.email;
+        user.email = req.body.email;  
         if (req.body.username == null || req.body.username == '' || req.body.email == null ||
-            req.body.password == null || req.body.password == '' || req.body.email == '') {
-            res.json({
-                success: false,
-                message: "Ensure username, email and password were provided."
-            })
+            req.body.password == null || req.body.password == '' || req.body.email == '' ||
+            req.body.name == null || req.body.name == '') {
+            res.json({ success: false, message: "Ensure username, email and password were provided." })
         } else {
             user.save(function (err) {
+                // Configuring errors for each field in the register form
                 if (err) {
-                    res.json({
-                        success: false,
-                        message: "Username or email already exists."
-                    });
-                } else {
-                    res.json({
-                        success: true,
-                        message: 'User created'
-                    })
+                    //Validating the errors in the validation form
+                    if (err.errors) {
+                        console.log(err)
+                        if (err.errors.name) {
+                            res.json({ success: false, message: err.errors.name.message});
+                        } else {
+                            if (err.errors.email) {
+                                res.json({ success: false, message: err.errors.email.message });
+                            } else {
+                                if (err.errors.username) {
+                                    res.json({ success: false, message: err.errors.username.message });
+                                } else {
+                                    if (err.errors.password) {
+                                        res.json({ success: false, message: err.errors.password.message});
+                                    }
+                                }
+                            }
+                        }
+                    }else {
+                        if (err) {
+                                // Configuring error for duplicates
+                            if (err.code == 11000) {
+                                // Specifying what is duplicated from the err
+                                if (err.errmsg.indexOf('username')!==-1) {
+                                    res.json({ success: false, message: 'That username is already taken'})
+                                }else{
+                                    if (err.errmsg.indexOf('email')!==-1) {
+                                        res.json({ success: false, message: 'That email is already taken'})
+                                    }
+                                }
+                            }else{
+                                res.json({ success: false, message: err});
+                            } 
+                        }       
+                    }
+                } else{
+                    res.json({success: true, message: "User created."});
                 }
             });
         }
@@ -40,45 +68,25 @@ module.exports = function (router) {
 
     // http://localhost:8080/api/authenticate
     router.post('/authenticate', function (req, res) {
-        User.findOne({
-            username: req.body.username
-        }).select('email username password').exec(function (err, user) {
+        User.findOne({ username: req.body.username }).select('email username password').exec(function (err, user) {
             if (err) throw err;
 
             if (!user) {
-                res.json({
-                    success: false,
-                    message: "Could not authenticate user"
-                })
+                res.json({ success: false,  message: "Could not authenticate user" })
             } else {
                 if (user) {
                     if (req.body.password) {
                         var validPassword = user.comparePassword(req.body.password);
                     } else {
-                        res.json({
-                            success: false,
-                            message: "No password provided."
-                        });
+                        res.json({ success: false, message: "No password provided." });
                     }
 
                     if (!validPassword) {
-                        res.json({
-                            success: false,
-                            message: "Could not authenticate password."
-                        });
+                        res.json({ success: false,  message: "Could not authenticate password." });
                     } else {
                         // Setting token
-                        var token = jwt.sign({
-                            username: user.username,
-                            email: user.email
-                        }, secret, {
-                            expiresIn: '24h'
-                        });
-                        res.json({
-                            success: true,
-                            message: "User authenticated!",
-                            token: token
-                        });
+                        var token = jwt.sign({username: user.username, email: user.email }, secret, { expiresIn: '24h' });
+                        res.json({ success: true, message: "User authenticated!", token: token });
                     }
                 }
             }
