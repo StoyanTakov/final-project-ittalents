@@ -1,45 +1,77 @@
 <div class="container">
     <div class="row picure">
         <div class="col-md-12 backgroundPic">
-            <div class="col-md-2">
-                <img src="https://d2ln1xbi067hum.cloudfront.net/assets/default_user-abdf6434cda029ecd32423baac4ec238.png" id="user-pic" alt="">
-            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-8 col-md-2">
-            <button class="btn btn-primary">Change Profie Pic</button>
-        </div>
-        <div class="col-md-2">
+        <div class="col-md-offset-10 col-md-2">
             <button class="btn btn-primary">Change Background</button>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <h3>{{main.username}}</h3>
+        <div class="col-md-2">
+            <img src="https://d2ln1xbi067hum.cloudfront.net/assets/default_user-abdf6434cda029ecd32423baac4ec238.png" id="user-pic" alt="">
         </div>
     </div>
     <div class="row">
-        <div class="col-md-1">
-            <button class="btn">Home</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn">Videos</button>
-        </div>
-        <div class="col-md-1">
-            <button class="btn">Playlists</button>
+        <div class="col-md-4">
+            <h3>Hello, {{main.username}}</h3>
         </div>
     </div>
-    <div class="row home profile-navigation" ng-hide="showHome" ng-click="hideHome()">
-        <h1>Home</h1>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-5">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#" ng-click="hideHome()">
+                        <strong>HOME</strong>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#" ng-click="showAllVideos()">
+                        <strong>VIDEOS</strong>
+                    </a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <a href="#" ng-click="showPlaylists()">
+                        <strong>PLAYLISTS</strong>
+                    </a>
+                </li>
+            </ol>
+        </div>
     </div>
-    <div class="row videos profile-navigation" ng-hide="showVideos" ng-click="showAllVideos()">
+    <div class="row home profile-navigation" ng-hide="showHome">
+        <div class="col-md-6">
+            <form>
+                <fieldset>
+                    <legend>User Settings</legend>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Change User Name</label>
+                        <input type="text" class="form-control" id="newUsername" placeholder="Enter Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Change Profile picture</label>
+                        <input type="file" class="form-control-file" id="profile-picture">
+                    </div>
+                    <div class="form-group">
+                        <label for="newEmail">Change Email address</label>
+                        <input type="text" class="form-control" id="newEmail" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Change Password</label>
+                        <input type="password" class="form-control" id="newPassword" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="row videos profile-navigation" ng-hide=showVideos>
         <h1>videos</h1>
     </div>
-    <div class="row playlists profile-navigation" ng-hide="showPlaylist" ng-click="showPlaylists()">
+    <div class="row playlists profile-navigation" ng-hide="showPlaylist">
         <div class="col-md-4">
             <p>Create New Playlist :
-                <button class="btn">
+                <button class="btn btn-primary">
                     +add playlist</button>
             </p>
         </div>

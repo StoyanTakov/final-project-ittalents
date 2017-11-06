@@ -92,3 +92,8 @@ header{
     height: 50%;
     width: 100%;
 }
+
+.profile-navigation{
+    background-color: whitesmoke;
+    border-top:1px solid gray;
+}
