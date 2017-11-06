@@ -1,4 +1,7 @@
 /* main page css */
+body{
+    background-image: url(http://www.wallpaperbetter.com/wallpaper/482/193/271/circle-blue-circular-round-hd-1080P-wallpaper.jpg);
+}
 a>img{
     width: 20px;
     opacity: 0.6;

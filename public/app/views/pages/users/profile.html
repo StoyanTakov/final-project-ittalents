@@ -43,10 +43,12 @@
         <div class="col-md-6">
             <form>
                 <fieldset>
-                    <legend>User Settings</legend>
+                    <legend>
+                        <h1>{{main.username}} Settings</h1>
+                    </legend>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Change User Name</label>
-                        <input type="text" class="form-control" id="newUsername" placeholder="Enter Username">
+                        <input type="text" class="form-control" id="newUsername" placeholder="New Username">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Change Profile picture</label>
@@ -54,11 +56,11 @@
                     </div>
                     <div class="form-group">
                         <label for="newEmail">Change Email address</label>
-                        <input type="text" class="form-control" id="newEmail" placeholder="Enter email">
+                        <input type="text" class="form-control" id="newEmail" placeholder="New Email">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Change Password</label>
-                        <input type="password" class="form-control" id="newPassword" placeholder="Password">
+                        <input type="password" class="form-control" id="newPassword" placeholder="New Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </fieldset>
@@ -66,10 +68,15 @@
         </div>
     </div>
     <div class="row videos profile-navigation" ng-hide=showVideos>
-        <h1>videos</h1>
+        <legend>
+            <h1>{{main.username}} Videos</h1>
+        </legend>
     </div>
     <div class="row playlists profile-navigation" ng-hide="showPlaylist">
         <div class="col-md-4">
+            <legend>
+                <h1>{{main.username}} Playlists</h1>
+            </legend>
             <p>Create New Playlist :
                 <button class="btn btn-primary">
                     +add playlist</button>
