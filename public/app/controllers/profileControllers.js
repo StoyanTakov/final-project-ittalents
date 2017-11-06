@@ -1,15 +1,15 @@
 angular.module('profileControllers', [])
     .controller('profileBarController', function ($scope) {
 
-        $scope.showHome = false;
+        $scope.showHome = true;
         $scope.hideHome = hideHome;
         function hideHome() {
-            if ($scope.showHome == false) {
-                $scope.showVideos = false;
-                $scope.showHome = true;
+            if ($scope.showHome == true) {
+                $scope.showVideos = true;
+                $scope.showHome = false;
                 $scope.showPlaylist = true;
             } else {
-                $scope.showHome = false;
+                $scope.showHome = true;
             }
         }
         $scope.showVideos = true;
