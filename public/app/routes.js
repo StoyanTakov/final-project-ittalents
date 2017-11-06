@@ -1,4 +1,4 @@
-angular.module('appRoutes', ['ngRoute'])
+var app = angular.module('appRoutes', ['ngRoute'])
 
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
@@ -12,49 +12,75 @@ angular.module('appRoutes', ['ngRoute'])
             .when('/register', {
                 templateUrl: 'app/views/pages/users/register.html',
                 controller: 'registerController',
-                controllerAs: "register"
+                controllerAs: "register",
+                authenticated: false
             })
             .when('/login', {
-                templateUrl: 'app/views/pages/users/login.html'
+                templateUrl: 'app/views/pages/users/login.html',
+                authenticated: false
             })
             .when('/profile', {
                 templateUrl: 'app/views/pages/users/profile.html',
-                controller: 'profileBarController'
+                controller: 'profileBarController',
+                authenticated: true
             })
             .when('/upload', {
                 templateUrl: 'app/views/pages/users/upload-video.html',
                 controller: 'uploadVideoController',
-                controllerAs: 'up'
+                controllerAs: 'up',
+                authenticated: true
             })
             .when('/logout', {
                 templateUrl: 'app/views/pages/users/logout.html',
+                authenticated: true
             })
-            .when('/facebook/:token',{
+            .when('/facebook/:token', {
                 templateUrl: 'app/views/pages/users/social/social.html',
                 controller: 'facebookController',
-                controllerAs: 'facebook'
+                controllerAs: 'facebook',
+                authenticated: false
             })
-            .when('/facebookerror',{
+            .when('/facebookerror', {
                 templateUrl: 'app/view/pages/users/login.html',
                 controller: 'facebookController',
-                controllerAs: 'facebook'
+                controllerAs: 'facebook',
+                authenticated: false
             })
-            .when('/google/:token',{
+            .when('/google/:token', {
                 templateUrl: 'app/views/pages/users/social/social.html',
                 controller: 'googleController',
-                controllerAs: 'google'
+                controllerAs: 'google',
+                authenticated: false
             })
-            .when('/googleerror',{
+            .when('/googleerror', {
                 templateUrl: 'app/view/pages/users/login.html',
                 controller: 'googleController',
-                controllerAs: 'google'
+                controllerAs: 'google',
+                authenticated: false
             })
             .otherwise({
                 redirectTo: '/'
             });
-
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false
         });
     });
+    //Restricting routes if you are logged in or not while using an additional variable 'authenticated' in every route
+app.run(['$rootScope','Auth','$location', function ($rootScope, Auth,$location) {
+    $rootScope.$on('$routeChangeStart' , function (event, next, current) {
+       if (next.$$route.authenticated==true) {
+           if (!Auth.isLoggedIn()) {
+               event.preventDefault();
+               $location.path('/');
+           }
+       }else{
+           if (next.$$route.authenticated==false) {
+               if (Auth.isLoggedIn()) {
+                   event.preventDefault();
+                   $location.path('/');
+               }
+           }
+       }
+    })
+}])

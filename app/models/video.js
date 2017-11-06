@@ -55,5 +55,4 @@ var VideoSchema = new Schema({
     }
 });
 
-W
 module.exports = mongoose.model("Video", VideoSchema);

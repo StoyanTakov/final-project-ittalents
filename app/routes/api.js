@@ -38,33 +38,6 @@ module.exports = function (router) {
 
     // User login route
 
-    // http://localhost:8080/api/fbLogin
-    router.post('/fbLogin',function(req,res){
-        User.findOne({email: req.body.email }).select('username password email').exec(function(err,user){
-            if (err)  throw err;
-
-            if (user && user != null) {
-                 // Setting token
-                 var token = jwt.sign({
-                    username: user.username,
-                    email: user.email
-                }, secret, {
-                    expiresIn: '24h'
-                });
-                res.json({
-                    success: true,
-                    message: "User authenticated!",
-                    token: token
-                });
-            }else{
-                res.json({
-                    success: false,
-                    message: "Could not authenticate user"
-                })
-            }
-        })
-    })
-
     // http://localhost:8080/api/authenticate
     router.post('/authenticate', function (req, res) {
         User.findOne({

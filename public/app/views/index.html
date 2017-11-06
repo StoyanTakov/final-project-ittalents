@@ -39,9 +39,9 @@
         <div class="container-fluid">
             <div>
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li ng-click="showMenu()">
                         <a href="#">
-                            <img ng-click="showMenu()" id='menu-btn' src="../assets/img/menu-button.png" alt="menu">
+                            <img  id='menu-btn' src="../assets/img/menu-button.png" alt="menu">
                         </a>
                     </li>
                     <li class="active">
@@ -68,8 +68,8 @@
                         <a href="/register">
                             <span class="glyphicon glyphicon-circle-arrow-right"></span> Register</a>
                     </li>
-                    <li ng-show="main.isLoggedIn">
-                        <a href="#">{{ main.username }}</a>
+                    <li ng-show="main.isLoggedIn" >
+                        <a href="/profile">{{ main.username }}</a>
                     </li>
                     <li ng-show="main.isLoggedIn" ng-click="main.logout()">
                         <a href="#">
@@ -82,9 +82,9 @@
     <div class="container col-md-2" ng-show="menuVisible">
         <div class='row'>
             <ul class="nav navbar-nav">
-                <li>
+                <li ng-click="showMenu()">
                     <a href="#">
-                        <img ng-click="showMenu()" id='menu-btn' src="../assets/img/menu-button.png" alt="menu">
+                        <img  id='menu-btn' src="../assets/img/menu-button.png" alt="menu">
                     </a>
                 </li>
                 <li class="active">

@@ -10,13 +10,13 @@ angular.module('registerController',['userServices'])
             if (data.data.success) {
                 app.loading = false;
                 // Success message
-                app.successMsg = data.data.message+'...redirecting to home page.';
+                app.successMsg = data.data.message+'...redirecting to login page.';
                 // Redirect to home page with a 2 second delay
                 $timeout(function(){
                     //Clearing the data for the registration form
                     app.regData = '';
                     app.successMsg = false;
-                    $location.path('/');
+                    $location.path('/login');
                 },2000)
             }else{
                 app.loading = false;
