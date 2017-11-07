@@ -51,4 +51,5 @@ angular.module('mainVideoController', [])
                 $scope.shareMenu = true;
             }
         }
+        $scope.filename = "file-1510089480072.mp4";
     })

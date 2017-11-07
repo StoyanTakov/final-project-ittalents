@@ -1,5 +1,5 @@
 angular.module('updateControllers', ['ngFileUpload'])
-    .controller('uploadVideoController', function (Upload, $window) {
+    .controller('uploadVideoController', function (Upload, $window,$http) {
         var self = this;
         self.submit = function () { //function to call on form submit
             if (self.upload_form.file.$valid && (self.file)) { //check if from is valid
@@ -7,8 +7,9 @@ angular.module('updateControllers', ['ngFileUpload'])
             }
         }
         self.upload = function (file) {
+            console.log(file);
             Upload.upload({
-                url: 'http://localhost:8080/api/uploads', //webAPI exposed to upload the file
+                url: 'http://localhost:8080/api/uploads/', //webAPI exposed to upload the file
                 data: { file: file } //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if (resp.data.error_code === 0) { //validate success
