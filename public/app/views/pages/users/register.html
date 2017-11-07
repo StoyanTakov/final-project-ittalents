@@ -1,35 +1,52 @@
-<div class="page-header">
-    <h1>User Registration</h1>
-</div>
-<form action="POST" ng-submit="register.regUser($event,regData)">
-     <!-- Name -->
-     <label>Name:</label>
-     <input class="form-control" type="text" name="name" placeholder="Enter you name" ng-model="register.regData.name">
-     <br>
-    <!-- Email -->
-    <label>Email:</label>
-    <input class="form-control" type="text" name="email" placeholder="Enter you email" ng-model="register.regData.email">
-    <br>
-    <!-- Username -->
-    <label>Username:</label>
-    <input class="form-control" type="text" name="username" placeholder="Enter username" ng-model="register.regData.username">
-    <br>
-    <!-- Password -->
-    <label>Password:</label>
-    <input class="form-control" type="password" name="password" placeholder="Enter password" ng-model="register.regData.password">
-    <br>
-    <button class="btn btn-primary" type="submit">Register</button>
-</form>
-<br>
-<div class="jumbotron text-center" ng-show="register.loading">
-    <span class="glyphicon glyphicon-repeat spinner"></span>
-    <p>Loading...</p>
-</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-6 login-container">
+            <div class="page-header">
+                <h1>User Registration</h1>
+            </div>
+            <form action="POST" class="register-form" ng-submit="register.regUser($event,regData)">
+                <!-- Name -->
+                <label>Name:</label>
+                <input class="form-control" type="text" name="name" placeholder="Enter you name" ng-model="register.regData.name">
+                <br>
+                <!-- Email -->
+                <label>Email:</label>
+                <input class="form-control" type="text" name="email" placeholder="Enter you email" ng-model="register.regData.email">
+                <br>
+                <!-- Username -->
+                <label>Username:</label>
+                <input class="form-control" type="text" name="username" placeholder="Enter username" ng-model="register.regData.username">
+                <br>
+                <!-- Password -->
+                <label>Password:</label>
+                <input class="form-control" type="password" name="password" placeholder="Enter password" ng-model="register.regData.password">
+                <br>
+                <button class="btn btn-primary" type="submit">Register</button>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-6">
+                <div class="jumbotron text-center" ng-show="register.loading">
+                    <span class="glyphicon glyphicon-repeat spinner"></span>
+                    <p>Loading...</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-6">
+                <div class="row show-hide-message" ng-show="register.successMsg">
+                    <div class="alert alert-success">{{ register.successMsg }}</div>
+                </div>
+            </div>
+        </div>
 
-<div class="row show-hide-message" ng-show="register.successMsg">
-    <div class="alert alert-success">{{ register.successMsg }}</div>
-</div>
-<br>
-<div class="row show-hide-message" ng-show="register.errorMsg">
-    <div class="alert alert-danger">{{register.errorMsg}}</div>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-6">
+                <div class="row show-hide-message" ng-show="register.errorMsg">
+                    <div class="alert alert-danger">{{register.errorMsg}}</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

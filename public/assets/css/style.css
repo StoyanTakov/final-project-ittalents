@@ -102,3 +102,11 @@ header{
     background-color: whitesmoke;
     border-top:1px solid gray;
 }
+.login-container{
+    background-color: whitesmoke;
+    border-radius: 1em;
+}
+
+form{
+    margin: 1em;
+}
