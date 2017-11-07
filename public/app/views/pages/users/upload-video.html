@@ -23,17 +23,21 @@
                     <textarea class="form-control" id="discription" rows="5"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="file">Choose Video to puload</label>
-                    <input type="file" ngf-select ng-model="up.file" name="file" ngf-pattern="'video/*'" accept="video/*" ngf-max-size="1GB"
-                    /> Video thumbnail:
-                    <video controls ngf-src="file" ngf-thumbnail="up.file || 'https://i.ytimg.com/vi/T0Jqdjbed40/mqdefault.jpg'"></video>
-                    <i ng-show="up.upload_form.file.$error.required">*required</i>
-                    <br>
-                    <i ng-show="up.upload_form.file.$error.maxSize">File too large {{up.file.size / 1000000|number:1}}MB: max 1GB</i>
-                    <p>{{up.progress}}</p>
-                    
+                    <div class="col-md-5">
+                        <label for="file">Choose Video to puload</label>
+                        <input type="file" ngf-select ng-model="up.file" name="file" ngf-pattern="'video/*'" accept="video/*" ngf-max-size="1GB"
+                        /> Video thumbnail:
+                        <video controls ngf-src="file" ngf-thumbnail="up.file || 'https://i.ytimg.com/vi/T0Jqdjbed40/mqdefault.jpg'"></video>
+                        <i ng-show="up.upload_form.file.$error.required">*required</i>
+                        <br>
+                        <i ng-show="up.upload_form.file.$error.maxSize">File too large {{up.file.size / 1000000|number:1}}MB: max 1GB</i>
+                        <p>{{up.progress}}</p>
+                    </div>
+                    <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary upload-btn" ng-click="up.submit()">Upload</button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary" ng-click="up.submit()">Upload</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>
     </div>
