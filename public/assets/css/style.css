@@ -1,6 +1,8 @@
 /* main page css */
 body{
-    background-image: url(http://www.wallpaperbetter.com/wallpaper/482/193/271/circle-blue-circular-round-hd-1080P-wallpaper.jpg);
+    background-image: url(../img/background-pic.jpg);
+    background-repeat:no-repeat;
+    background-size: cover;
 }
 a>img{
     width: 20px;
@@ -54,7 +56,7 @@ header{
 }
 #upload-form{
     border-radius: 1em;
-    background-color:rgb(243, 187, 91);
+    background-color:whitesmoke;
 }
 #upload-btn{
     margin-bottom: 1em;
@@ -102,4 +104,12 @@ header{
 }
 #mainVideo{
     max-width: 900px;
+}
+.login-container{
+    background-color: whitesmoke;
+    border-radius: 1em;
+}
+
+form{
+    margin: 1em;
 }
