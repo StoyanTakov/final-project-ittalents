@@ -110,3 +110,7 @@ header{
 form{
     margin: 1em;
 }
+.video-background{
+    background-color: whitesmoke;
+    border-radius: 1em;
+}
