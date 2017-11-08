@@ -10,7 +10,6 @@ var VideoSchema = new Schema({
     },
     name: {
         type: String,
-        required: true,
         unique: false
     },
     publisher: {

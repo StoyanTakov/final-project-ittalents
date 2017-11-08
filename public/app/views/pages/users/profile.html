@@ -40,11 +40,11 @@
         </div>
     </div>
     <div class="row home profile-navigation" ng-hide="showHome">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <form>
                 <fieldset>
                     <legend>
-                        <h1>{{main.username}} Settings</h1>
+                        <h1>Settings</h1>
                     </legend>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Change User Name</label>
@@ -66,10 +66,13 @@
                 </fieldset>
             </form>
         </div>
+        <div class="col-md-4">
+            
+        </div>
     </div>
     <div class="row videos profile-navigation" ng-hide=showVideos>
         <legend>
-            <h1>{{main.username}} Videos</h1>
+            <h1>Videos</h1>
         </legend>
         <div ng-repeat="vid in videos">
             <a ng-href="/video/{{vid.url}}" class='vidImgs'><img src="assets/img/video-img.jpg" alt="click video"></a>
@@ -80,7 +83,7 @@
     <div class="row playlists profile-navigation" ng-hide="showPlaylist">
         <div class="col-md-4">
             <legend>
-                <h1>{{main.username}} Playlists</h1>
+                <h1>Playlists</h1>
             </legend>
             <p>Create New Playlist :
                 <button class="btn btn-primary">
