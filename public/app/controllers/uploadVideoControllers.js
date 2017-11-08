@@ -7,7 +7,6 @@ angular.module('updateControllers', ['ngFileUpload'])
             }
         }
         self.upload = function (file) {
-            console.log(file);
             Upload.upload({
                 url: 'http://localhost:8080/api/uploads/', //webAPI exposed to upload the file
                 data: { file: file } //pass file as data, should be user ng-model
