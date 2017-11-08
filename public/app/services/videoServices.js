@@ -8,6 +8,9 @@ angular.module('videoServices',[])
     videoFactory.getVid = function(name){
         return $http.get('/api/video/'+name);
     }
+    videoFactory.getOwnVids = function(){
+        return $http.get('/api/')
+    }
 
     return videoFactory;
 })

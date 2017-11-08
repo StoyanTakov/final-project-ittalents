@@ -213,6 +213,20 @@ module.exports = function (router) {
             // console.log(video)
             if (videos!==null) {
                 res.send(videos);
+            }else{
+                res.json({success : false});
+            }
+
+        })
+    })
+    router.get('/ownVideos', function (req, res) {
+        Video.find({publisher: req.decoded.email}).exec(function (err, videos) {
+            // console.log(req.decoded)
+            // console.log(video)
+            if (videos!==null) {
+                res.send(videos);
+            }else{
+                res.json({success : false});
             }
 
         })

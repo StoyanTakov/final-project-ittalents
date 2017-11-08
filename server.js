@@ -39,10 +39,9 @@ mongoose.connect('mongodb://localhost:27017/youtubedb', function (err) {
   }
 });
 
-//Responding with the index.html when entering the website
+
 app.get('/stream/:url', function (req, res) {
-  console.log(req)
-  const path = './uploads/'+req.params.url;
+  const path = './uploads/' + req.params.url;
   const stat = fs.statSync(path)
   const fileSize = stat.size
   const range = req.headers.range
@@ -74,6 +73,8 @@ app.get('/stream/:url', function (req, res) {
     fs.createReadStream(path).pipe(res)
   }
 })
+
+//Responding with the index.html when entering the website
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname + "/public/app/views/index.html"));
 })

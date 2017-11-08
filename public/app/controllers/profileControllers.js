@@ -1,5 +1,5 @@
-angular.module('profileControllers', [])
-    .controller('profileBarController', function ($scope) {
+angular.module('profileControllers', ['videoServices'])
+    .controller('profileBarController', function ($scope,Video) {
 
         $scope.showHome = true;
         $scope.hideHome = hideHome;
@@ -21,6 +21,9 @@ angular.module('profileControllers', [])
                 $scope.showPlaylist = true;
             } else {
                 $scope.showVideos = true;
+                Video.getOwnVids().then(function(data){
+                    $scope.videos = data.data;
+                })
             }
         }
         $scope.showPlaylist = true;

@@ -11,7 +11,7 @@ angular.module('mainController', ['authServices','videoServices'])
         }
         $scope.loadMainVids = function(){
             Video.getMainVids().then(function(data){
-                console.log(data.data)
+                console.log(data)
                 $scope.videos = data.data;
             })
         }();

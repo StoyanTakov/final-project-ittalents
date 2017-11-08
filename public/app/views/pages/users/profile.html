@@ -71,6 +71,11 @@
         <legend>
             <h1>{{main.username}} Videos</h1>
         </legend>
+        <div ng-repeat="vid in videos">
+            <a ng-href="/video/{{vid.url}}" class='vidImgs'><img src="assets/img/video-img.jpg" alt="click video"></a>
+            <span>{{vid.name}}</span>
+            <span>{{vid.publisher}}</span>
+        </div>
     </div>
     <div class="row playlists profile-navigation" ng-hide="showPlaylist">
         <div class="col-md-4">
