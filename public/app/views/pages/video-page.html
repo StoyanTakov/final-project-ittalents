@@ -75,7 +75,7 @@
                         <p>Tags: </p>
                     </div>
                     <div class="col-md-1">
-                        {{video.snippet.tags}}
+                        {{video.publishInfo.tags}}
                     </div>
                 </div>
                 <div class="row video-description">
@@ -90,7 +90,7 @@
                 </div>
                 <div class="row video-description-text" ng-hide="showDescription">
                     <div class="col-md-12" ng-hide="click">
-                        <p>{{video.snippet.description}}</p>
+                        <p>{{video.publishInfo.description}}</p>
                     </div>
                 </div>
                 <div class="row video-comments">
@@ -127,11 +127,6 @@
                     <a href="">
                         <img src={{video.snippet.thumbnails.default.url}} alt="vidPicture">
                     </a>
-                </section>
-                <section class="col-md-4">
-                    <p>VID NAME</p>
-                    <p>USER NAME</p>
-                    <p>NUMBER OF VIEWS</p>
                 </section>
         </div>
         </aside>

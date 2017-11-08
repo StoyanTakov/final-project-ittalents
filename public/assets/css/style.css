@@ -103,28 +103,19 @@ header{
     border-top:1px solid gray;
 }
 #mainVideo{
-    max-width: 900px;
+    width: 100%;
 }
 #uploadVid{
-    max-width: 500px;
+    width: 100%;
 }
 .vidImgs{
-    width: 500px;
+    width: 100%;
 }
 .login-container{
     background-color: whitesmoke;
     border-radius: 1em;
 }
-#video-section a{
-    width: 500px;
-    height: 300px;
-    display: inline-block;
-}
-#video-section>div{
-    width: 500px;
-    height: 300px;
-    display: inline-block;
-}
+
 form{
     margin: 1em;
 }
@@ -134,4 +125,7 @@ form{
 }
 .tumbnail{
     width: 70%;
+}
+.profilevideo{
+    width: 30%;
 }

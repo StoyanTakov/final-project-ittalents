@@ -16,34 +16,34 @@ var VideoSchema = new Schema({
         type: String,
         unique: false
     },
-    // publishInfo: {
-    //     time: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     categories:{
-    //         type: String,
-    //         required: true
-    //     },
-    //     tags:{
-    //         type: String,
-    //         required: true,
-    //     },
-    //     description:{
-    //         type: String,
-    //         required: true
-    //     },
-    //     views:{
-    //         type: Number,
-    //     },
-    //     likes:{
-    //         type: Number,
-    //     },
-    //     dislikes:{
-    //         type: Number,
-    //     },
+    publishInfo: {
+        // time: {
+        //     type: String,
+        //     required: true
+        // },
+        categories:{
+            type: String,
+            required: true
+        },
+        tags:{
+            type: String,
+            required: true,
+        },
+        description:{
+            type: String,
+            required: true
+        },
+        views:{
+            type: Number,
+        },
+        likes:{
+            type: Number,
+        },
+        dislikes:{
+            type: Number,
+        },
 
-    // },
+    },
     // comments:{
     //     type: String,
     // }

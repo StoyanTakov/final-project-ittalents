@@ -15,15 +15,16 @@ angular.module('profileControllers', ['videoServices'])
         $scope.showVideos = true;
         $scope.showAllVideos = showAllVideos;
         function showAllVideos() {
+            Video.getOwnVids().then(function(data){
+                $scope.videos = data.data;
+            })
             if ($scope.showVideos == true) {
                 $scope.showVideos = false;
                 $scope.showHome = true;
                 $scope.showPlaylist = true;
             } else {
                 $scope.showVideos = true;
-                Video.getOwnVids().then(function(data){
-                    $scope.videos = data.data;
-                })
+               
             }
         }
         $scope.showPlaylist = true;

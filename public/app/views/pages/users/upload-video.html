@@ -5,30 +5,30 @@
             <form name="up.upload_form">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Name">
+                    <input type="text" ng-model="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Name">
                     <small id="nameHelp" class="form-text text-muted">Choose name for the video</small>
                 </div>
                 <div class="form-group">
                     <label for="tags">Tags</label>
-                    <input type="text" class="form-control" id="tags" aria-describedby="tagsHelp" placeholder="Tags">
+                    <input type="text" ng-model="tags" class="form-control" id="tags" aria-describedby="tagsHelp" placeholder="Tags">
                     <small id="tagsHelp" class="form-text text-muted">Separate each tag with space</small>
                 </div>
                 <div class="form-group">
                     <label for="categories">Categories</label>
-                    <select class="form-control" id="categories">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select class="form-control" id="categories" ng-model="categories">
+                        <option value="music">Music</option>
+                        <option value="sports">Sports</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="news">News</option>
+                        <option value="documentaries">Documentaries</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="5"></textarea>
+                    <textarea class="form-control" id="description" rows="5" ng-model="description"></textarea>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-5">
+                    <div class="col-md-12">
                         <label for="file">Choose Video to upload</label>
                         <input type="file" ngf-select ng-model="up.file" name="file" ngf-pattern="'video/*'" accept="video/*" ngf-max-size="1GB"
                         /> Video thumbnail:

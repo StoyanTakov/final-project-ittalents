@@ -1,6 +1,7 @@
 angular.module('mainController', ['authServices','videoServices'])
     .controller('mainController', function ($scope,Video, Auth, $timeout, $location, $rootScope, $window) {
         // Showing hiding menu
+        var app = this;
         $scope.menuVisible = false;
         $scope.showMenu = function () {
             if ($scope.menuVisible) {
@@ -11,10 +12,14 @@ angular.module('mainController', ['authServices','videoServices'])
         }
         $scope.loadMainVids = function(){
             Video.getMainVids().then(function(data){
-                $scope.videos = data.data;
+                app.videos = data.data;
             })
         }();
-
+        app.searchByName = function(searchName){
+            Video.getVideosByName(searchName).then(function(data){
+                app.videos = data.data;
+            })
+        }
         //Adding a variable to make the angular to load only when it's checking for the user
         //and using ng-cloak in the index.html
         $scope.loadMe = false;
@@ -36,7 +41,7 @@ angular.module('mainController', ['authServices','videoServices'])
             }
         })
         // Login
-        var app = this;
+       
 
         app.google = function () {
             $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/google';

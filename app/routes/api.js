@@ -128,8 +128,8 @@ module.exports = function (router) {
                             username: user.username,
                             email: user.email
                         }, secret, {
-                            expiresIn: '24h'
-                        });
+                                expiresIn: '24h'
+                            });
                         res.json({
                             success: true,
                             message: "User authenticated!",
@@ -186,6 +186,8 @@ module.exports = function (router) {
     /** API path that will upload the files */
     router.post('/uploads', function (req, res) {
         upload(req, res, function (err) {
+            console.log(err)
+            console.log(req.body);
             if (err) {
                 res.json({
                     error_code: 1,
@@ -197,12 +199,20 @@ module.exports = function (router) {
                 error_code: 0,
                 err_desc: null
             });
+
             var vid = new Video();
             vid.url = req.file.filename;
-            vid.name = req.file.originalname;
+            vid.name = req.body.name;
             vid.publisher = req.decoded.email;
-            vid.save(function (err) {
+            vid.publishInfo.tags = req.body.tags;
+            vid.publishInfo.categories = req.body.categories;
+            vid.publishInfo.views = 0;
+            vid.publishInfo.likes = 0;
+            vid.publishInfo.dislikes = 0;
+            vid.publishInfo.description = req.body.description;
 
+            vid.save(function (err) {
+                console.log(err)
             })
         })
     });
@@ -211,34 +221,44 @@ module.exports = function (router) {
         Video.find({}).exec(function (err, videos) {
             // console.log(req.decoded)
             // console.log(video)
-            if (videos!==null) {
+            if (videos !== null) {
                 res.send(videos);
-            }else{
-                res.json({success : false});
+            } else {
+                res.json({ success: false });
             }
 
         })
     })
     router.get('/ownVideos', function (req, res) {
-        Video.find({publisher: req.decoded.email}).exec(function (err, videos) {
+        Video.find({ publisher: req.decoded.email }).exec(function (err, videos) {
             // console.log(req.decoded)
             // console.log(video)
-            if (videos!==null) {
+            if (videos !== null) {
+                console.log(videos)
                 res.send(videos);
-            }else{
-                res.json({success : false});
+            } else {
+                res.json({ success: false });
             }
 
         })
     })
-    router.get('/video/:name',function(req,res){
-        Video.findOne({url: req.params.name }).exec(function (err, videos) {
+    router.get('/video/:name', function (req, res) {
+        Video.findOne({ url: req.params.name }).exec(function (err, videos) {
             // console.log(req.decoded)
             // console.log(video)
-            if (videos!==null) {
+            if (videos !== null) {
                 res.send(videos);
             }
+        })
+        router.get('/searchVideos/:name', function (req, res) {
+            Video.find({ name: req.params.name }).exec(function (err, videos) {
+                // console.log(req.decoded)
+                console.log(videos)
+                if (videos !== null) {
+                    res.send(videos);
+                }
+            })
+        })
     })
-})
     return router;
 }
