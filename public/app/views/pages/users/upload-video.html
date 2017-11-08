@@ -9,7 +9,7 @@
                     <small id="tagsHelp" class="form-text text-muted">Separate each tag with space</small>
                 </div>
                 <div class="form-group">
-                    <label for="categories">Categoeries</label>
+                    <label for="categories">Categories</label>
                     <select class="form-control" id="categories">
                         <option>1</option>
                         <option>2</option>
@@ -19,15 +19,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="discription">Discription</label>
-                    <textarea class="form-control" id="discription" rows="5"></textarea>
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="5"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="col-md-5">
-                        <label for="file">Choose Video to puload</label>
+                        <label for="file">Choose Video to upload</label>
                         <input type="file" ngf-select ng-model="up.file" name="file" ngf-pattern="'video/*'" accept="video/*" ngf-max-size="1GB"
                         /> Video thumbnail:
-                        <video controls ngf-src="file" ngf-thumbnail="up.file || 'https://i.ytimg.com/vi/T0Jqdjbed40/mqdefault.jpg'"></video>
+                        <video controls ngf-src="file" id='uploadVid' ngf-thumbnail="up.file || 'https://i.ytimg.com/vi/T0Jqdjbed40/mqdefault.jpg'"></video>
                         <i ng-show="up.upload_form.file.$error.required">*required</i>
                         <br>
                         <i ng-show="up.upload_form.file.$error.maxSize">File too large {{up.file.size / 1000000|number:1}}MB: max 1GB</i>

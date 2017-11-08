@@ -1,34 +1,17 @@
-angular.module('mainVideoController', [])
-    .controller('mainVideoController', function ($scope) {
-        var video = {
-            id: "7lCDEYXw3mM",
-            snippet: {
-                publishedAt: "2012-06-20T22:45:24.000Z",
-                channelId: "UC_x5XG1OV2P6uZZ5FSM9Ttw",
-                title: "Google I/O 101: Q&A On Using Google APIs",
-                description: "Antonio Fuentes speaks to us and takes questions on working with Google APIs and OAuth 2.0.",
-                thumbnails: {
-                    default: {
-                        url: "https://i.ytimg.com/vi/7lCDEYXw3mM/default.jpg"
-                    },
-                    medium: {
-                        url: "https://i.ytimg.com/vi/7lCDEYXw3mM/mqdefault.jpg"
-                    },
-                    high: {
-                        url: "https://i.ytimg.com/vi/7lCDEYXw3mM/hqdefault.jpg"
-                    }
-                },
-                categoryId: "28"
-            },
-            statistics: {
-                viewCount: "3057",
-                likeCount: "25",
-                dislikeCount: "0",
-                favoriteCount: "17",
-                commentCount: "12"
-            }
-        }
-        $scope.video = video;
+angular.module('mainVideoController', ['videoServices'])
+    .controller('mainVideoController', function ($scope,Video,$location) {  
+        var video = {};
+       
+        var loadVid = function(){
+            var name = $location.$$path.split('/')[2];
+            Video.getVid(name).then(function(data){
+                video = data.data;   
+                $scope.video = video;
+               
+                document.getElementById('mainVideo').load();
+            })
+        }();
+       
         $scope.showDescription = true;
         $scope.showInfoText = "Show";
         $scope.showInfo = showInfo;
@@ -51,5 +34,5 @@ angular.module('mainVideoController', [])
                 $scope.shareMenu = true;
             }
         }
-        $scope.filename = "file-1510089480072.mp4";
+        
     })

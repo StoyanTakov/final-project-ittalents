@@ -5,7 +5,7 @@ var app = angular.module('appRoutes', ['ngRoute'])
             .when('/', {
                 templateUrl: 'app/views/pages/home-page.html'
             })
-            .when('/video', {
+            .when('/video/:name', {
                 templateUrl: 'app/views/pages/video-page.html',
                 controller: "mainVideoController"
             })

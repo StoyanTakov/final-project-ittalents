@@ -198,7 +198,7 @@ module.exports = function (router) {
                 err_desc: null
             });
             var vid = new Video();
-            vid.url = './uploads/' + req.file.filename;
+            vid.url = req.file.filename;
             vid.name = req.file.originalname;
             vid.publisher = req.decoded.email;
             vid.save(function (err) {
@@ -208,7 +208,7 @@ module.exports = function (router) {
     });
     // Getting all videos in the data
     router.get('/allVideos', function (req, res) {
-        Video.findOne({ publisher: req.decoded.email }).exec(function (err, videos) {
+        Video.find({}).exec(function (err, videos) {
             // console.log(req.decoded)
             // console.log(video)
             if (videos!==null) {
@@ -217,5 +217,14 @@ module.exports = function (router) {
 
         })
     })
+    router.get('/video/:name',function(req,res){
+        Video.findOne({url: req.params.name }).exec(function (err, videos) {
+            // console.log(req.decoded)
+            // console.log(video)
+            if (videos!==null) {
+                res.send(videos);
+            }
+    })
+})
     return router;
 }
