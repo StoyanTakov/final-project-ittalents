@@ -4,6 +4,11 @@
             <h1>{{main.username}}, you can upload video here</h1>
             <form name="up.upload_form">
                 <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Name">
+                    <small id="nameHelp" class="form-text text-muted">Choose name for the video</small>
+                </div>
+                <div class="form-group">
                     <label for="tags">Tags</label>
                     <input type="text" class="form-control" id="tags" aria-describedby="tagsHelp" placeholder="Tags">
                     <small id="tagsHelp" class="form-text text-muted">Separate each tag with space</small>
@@ -34,7 +39,7 @@
                         <p>{{up.progress}}</p>
                     </div>
                     <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary upload-btn" ng-click="up.submit()">Upload</button>
+                        <button type="submit" class="btn btn-primary upload-btn" ng-click="up.submit()">Upload</button>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Submit</button>
