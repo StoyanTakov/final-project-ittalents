@@ -1,3 +1,10 @@
 <div class="page-header">
-    <h1></h1>
+    <h1>Vids</h1>
+    <div id='video-section'>
+        <div ng-repeat="vid in videos">
+            <a ng-href="/video/{{vid.url}}" class='vidImgs'><img src="assets/img/video-img.jpg" alt="click video"></a>
+            <span>{{vid.name}}</span>
+            <span>{{vid.publisher}}</span>
+        </div>
+    </div>
 </div>

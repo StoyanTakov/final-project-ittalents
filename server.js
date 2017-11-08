@@ -40,9 +40,9 @@ mongoose.connect('mongodb://localhost:27017/youtubedb', function (err) {
 });
 
 //Responding with the index.html when entering the website
-app.get('/video/:name', function (req, res) {
+app.get('/stream/:url', function (req, res) {
   console.log(req)
-  const path = './uploads/file-1510089480072.mp4';
+  const path = './uploads/'+req.params.url;
   const stat = fs.statSync(path)
   const fileSize = stat.size
   const range = req.headers.range

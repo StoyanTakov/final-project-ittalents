@@ -34,13 +34,13 @@ var VideoSchema = new Schema({
     //         required: true
     //     },
     //     views:{
-    //         type: String,
+    //         type: Number,
     //     },
     //     likes:{
-    //         type: String,
+    //         type: Number,
     //     },
     //     dislikes:{
-    //         type: String,
+    //         type: Number,
     //     },
 
     // },

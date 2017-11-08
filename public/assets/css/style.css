@@ -105,11 +105,26 @@ header{
 #mainVideo{
     max-width: 900px;
 }
+#uploadVid{
+    max-width: 500px;
+}
+.vidImgs{
+    width: 500px;
+}
 .login-container{
     background-color: whitesmoke;
     border-radius: 1em;
 }
-
+#video-section a{
+    width: 500px;
+    height: 300px;
+    display: inline-block;
+}
+#video-section>div{
+    width: 500px;
+    height: 300px;
+    display: inline-block;
+}
 form{
     margin: 1em;
 }
