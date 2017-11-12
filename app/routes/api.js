@@ -186,8 +186,8 @@ module.exports = function (router) {
     /** API path that will upload the files */
     router.post('/uploads', function (req, res) {
         upload(req, res, function (err) {
-            console.log(err)
-            console.log(req.body);
+            // console.log(err)
+            // console.log(req.body);
             if (err) {
                 res.json({
                     error_code: 1,
@@ -201,8 +201,8 @@ module.exports = function (router) {
             });
 
             var vid = new Video();
-            vid.url = req.file.filename;
-            vid.name = req.body.name;
+            vid.name = req.file.filename;
+            vid.title = req.body.title;
             vid.publisher = req.decoded.email;
             vid.publishInfo.tags = req.body.tags;
             vid.publishInfo.categories = req.body.categories;
@@ -219,10 +219,8 @@ module.exports = function (router) {
 
     router.get('/ownVideos', function (req, res) {
         Video.find({ publisher: req.decoded.email }).exec(function (err, videos) {
-            // console.log(req.decoded)
-            // console.log(video)
             if (videos !== null) {
-                console.log(videos)
+                // console.log(videos)
                 res.send(videos);
             } else {
                 res.json({ success: false });

@@ -3,12 +3,12 @@ var Schema = mongoose.Schema;
 
 
 var VideoSchema = new Schema({
-    url: {
+    name: {
         type: String,
         required: true,
         unique: false
     },
-    name: {
+    title: {
         type: String,
         unique: false
     },

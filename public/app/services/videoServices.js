@@ -11,8 +11,8 @@ angular.module('videoServices',[])
     videoFactory.getOwnVids = function(){
         return $http.get('/api/ownVideos')
     }
-    videoFactory.searchVids = function(name){
-        return $http.get('/api/searchVideos/'+name)
+    videoFactory.searchVids = function(title){
+        return $http.get('/api/searchVideos/'+title)
     }
 
     return videoFactory;

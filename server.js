@@ -77,8 +77,6 @@ app.get('/stream/:url', function (req, res) {
   // Getting all videos in the data
 app.get('/api/allVideos', function (req, res) {
     Video.find({}).exec(function (err, videos) {
-        // console.log(req.decoded)
-        // console.log(video)
         if (videos !== null) {
             res.send(videos);
         } else {
@@ -88,17 +86,16 @@ app.get('/api/allVideos', function (req, res) {
 })
     //API for getting a specific video
 app.get('/api/video/:name', function (req, res) {
-  Video.findOne({ url: req.params.name }).exec(function (err, videos) {
-      // console.log(req.decoded)
+  Video.findOne({ name: req.params.name }).exec(function (err, videos) {
       // console.log(video)
       if (videos !== null) {
           res.send(videos);
       }
   })
       //API for searching videos
-  app.get('/api/searchVideos/:name', function (req, res) {
-      Video.find({ name: req.params.name }).exec(function (err, videos) {
-          // console.log(req.decoded)
+app.get('/api/searchVideos/:title', function (req, res) {
+    console.log(12314)
+      Video.find({ title: {$regex: /req.params.title/i } }).exec(function (err, videos) {
           console.log(videos)
           if (videos !== null) {
               res.send(videos);

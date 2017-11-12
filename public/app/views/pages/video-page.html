@@ -5,7 +5,7 @@
                 <div class="row video-block">
                     <div>
                         <video id='mainVideo'controls>
-                            <source ng-src="http://localhost:8080/stream/{{mainVid.video.url}}" type="video/mp4">
+                            <source ng-src="http://localhost:8080/stream/{{mainVid.video.name}}" type="video/mp4">
                           </video>
                         </iframe>
                     </div>
@@ -14,7 +14,7 @@
                     <div class="container">
                         <div class="row title">
                             <div class="col-md-12" >
-                                <h3>{{mainVid.video.name}}</h3>
+                                <h3>{{mainVid.video.title}}</h3>
                             </div>
                         </div>
 

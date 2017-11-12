@@ -47,11 +47,11 @@
                         </a>
                     </li>
                     <li >
-                        <a href="/" >Tubata</a>
+                        <a href="/" ng-click="loadMainVids();main.searchTitle=''">Tubata</a>
                     </li>
                     <li>
-                        <input class="mr-sm-2" type="text" placeholder="Search" ng-model='main.searchName'>
-                        <button class="btn btn-secondary" ng-click="main.getVideosByName(main.searchName)" type="button">Search</button>
+                        <input class="mr-sm-2" type="text" placeholder="Search" ng-model='main.searchTitle'>
+                        <button class="btn btn-secondary" ng-click="main.searchByTitle(main.searchTitle)" type="button">Search</button>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

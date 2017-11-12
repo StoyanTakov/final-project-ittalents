@@ -1,5 +1,5 @@
-angular.module('mainController', ['authServices','videoServices'])
-    .controller('mainController', function ($scope,Video, Auth, $timeout, $location, $rootScope, $window) {
+angular.module('mainController', ['authServices', 'videoServices'])
+    .controller('mainController', function ($scope, Video, Auth, $timeout, $location, $rootScope, $window) {
         // Showing hiding menu
         var app = this;
         $scope.menuVisible = false;
@@ -10,27 +10,28 @@ angular.module('mainController', ['authServices','videoServices'])
                 $scope.menuVisible = true;
             }
         }
-        $scope.loadMainVids = function(){
-            Video.getMainVids().then(function(data){
-               if (data.data) {
-                   if (Array.isArray(data.data)) {
-                       app.videos = data.data;
-                    //    console.log(app.videos)
-                   }else{
-                       app.videos = []; // If there are no vids put a message
-                   }
-               }
-            })
-        }();
-        app.searchByName = function(searchName){
-            Video.getVideosByName(searchName).then(function(data){
-                if (data.data) {
-                    if (!data.data.success) {
-                    //  console.log(data.data)
+        $scope.loadMainVids = function () {
+            if (app.isSearching) {
+                $location.path('/')
+                app.isSearching = false;
+                app.searchedVids = [];
+                app.videos = data.data;
+            } else {
+                Video.getMainVids().then(function (data) {
+                    if (data.data) {
                         app.videos = data.data;
-                    }else{
-                        app.videos = [];
                     }
+                })
+            }
+        };
+        $scope.loadMainVids();
+        app.searchByTitle = function (searchTitle) {
+            Video.searchVids(searchTitle).then(function (data) {
+                isSearching = true;
+                if (data.data) {
+                    app.videos = [];
+                    app.searchedVids = data.data;
+                    console.log(data);
                 }
             })
         }
@@ -50,18 +51,18 @@ angular.module('mainController', ['authServices','videoServices'])
                 app.isLoggedIn = false;
                 // $scope.loadMe = true;
             }
-            if ($location.hash()=='_=_') { //Removing the additional url signs from facebook
+            if ($location.hash() == '_=_') { //Removing the additional url signs from facebook
                 $location.hash(null);
             }
         })
         // Login
-       
+
 
         app.google = function () {
             $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/google';
         }
-        app.facebook = function(){
-                                  // http:                             //localhost:8080
+        app.facebook = function () {
+            // http:                             //localhost:8080
             $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/facebook';
         }
         //Login function
