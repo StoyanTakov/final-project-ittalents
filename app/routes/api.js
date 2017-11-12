@@ -216,19 +216,7 @@ module.exports = function (router) {
             })
         })
     });
-    // Getting all videos in the data
-    router.get('/allVideos', function (req, res) {
-        Video.find({}).exec(function (err, videos) {
-            // console.log(req.decoded)
-            // console.log(video)
-            if (videos !== null) {
-                res.send(videos);
-            } else {
-                res.json({ success: false });
-            }
 
-        })
-    })
     router.get('/ownVideos', function (req, res) {
         Video.find({ publisher: req.decoded.email }).exec(function (err, videos) {
             // console.log(req.decoded)
@@ -242,23 +230,6 @@ module.exports = function (router) {
 
         })
     })
-    router.get('/video/:name', function (req, res) {
-        Video.findOne({ url: req.params.name }).exec(function (err, videos) {
-            // console.log(req.decoded)
-            // console.log(video)
-            if (videos !== null) {
-                res.send(videos);
-            }
-        })
-        router.get('/searchVideos/:name', function (req, res) {
-            Video.find({ name: req.params.name }).exec(function (err, videos) {
-                // console.log(req.decoded)
-                console.log(videos)
-                if (videos !== null) {
-                    res.send(videos);
-                }
-            })
-        })
-    })
+    
     return router;
 }

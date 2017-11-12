@@ -3,17 +3,20 @@ var app = angular.module('appRoutes', ['ngRoute'])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'app/views/pages/home-page.html'
+                templateUrl: 'app/views/pages/home-page.html',
+                // authenticated: false
             })
             .when('/video/:name', {
                 templateUrl: 'app/views/pages/video-page.html',
-                controller: "mainVideoController"
+                controller: "mainVideoController",
+                controllerAs: 'mainVid'
+                // authenticated: false
             })
             .when('/register', {
                 templateUrl: 'app/views/pages/users/register.html',
                 controller: 'registerController',
                 controllerAs: "register",
-                authenticated: false
+                // authenticated: false
             })
             .when('/login', {
                 templateUrl: 'app/views/pages/users/login.html',
@@ -22,41 +25,41 @@ var app = angular.module('appRoutes', ['ngRoute'])
             .when('/profile', {
                 templateUrl: 'app/views/pages/users/profile.html',
                 controller: 'profileBarController',
-                authenticated: true
+                // authenticated: true
             })
             .when('/upload', {
                 templateUrl: 'app/views/pages/users/upload-video.html',
                 controller: 'uploadVideoController',
                 controllerAs: 'up',
-                authenticated: true
+                // authenticated: true
             })
             .when('/logout', {
                 templateUrl: 'app/views/pages/users/logout.html',
-                authenticated: true
+                // authenticated: true
             })
             .when('/facebook/:token', {
                 templateUrl: 'app/views/pages/users/social/social.html',
                 controller: 'facebookController',
                 controllerAs: 'facebook',
-                authenticated: false
+                // authenticated: false
             })
             .when('/facebookerror', {
                 templateUrl: 'app/view/pages/users/login.html',
                 controller: 'facebookController',
                 controllerAs: 'facebook',
-                authenticated: false
+                // authenticated: false
             })
             .when('/google/:token', {
                 templateUrl: 'app/views/pages/users/social/social.html',
                 controller: 'googleController',
                 controllerAs: 'google',
-                authenticated: false
+                // authenticated: false
             })
             .when('/googleerror', {
                 templateUrl: 'app/view/pages/users/login.html',
                 controller: 'googleController',
                 controllerAs: 'google',
-                authenticated: false
+                // authenticated: false
             })
             .otherwise({
                 redirectTo: '/'
@@ -67,20 +70,20 @@ var app = angular.module('appRoutes', ['ngRoute'])
         });
     });
     //Restricting routes if you are logged in or not while using an additional variable 'authenticated' in every route
-app.run(['$rootScope','Auth','$location', function ($rootScope, Auth,$location) {
-    $rootScope.$on('$routeChangeStart' , function (event, next, current) {
-       if (next.$$route.authenticated==true) {
-           if (!Auth.isLoggedIn()) {
-               event.preventDefault();
-               $location.path('/');
-           }
-       }else{
-           if (next.$$route.authenticated==false) {
-               if (Auth.isLoggedIn()) {
-                   event.preventDefault();
-                   $location.path('/');
-               }
-           }
-       }
-    })
-}])
+// app.run(['$rootScope','Auth','$location', function ($rootScope, Auth,$location) {
+//     $rootScope.$on('$routeChangeStart' , function (event, next, current) {
+//        if (next.$$route.authenticated==true) {
+//            if (!Auth.isLoggedIn()) {
+//                event.preventDefault();
+//                $location.path('/');
+//            }
+//        }else{
+//            if (next.$$route.authenticated==false) {
+//                if (Auth.isLoggedIn()) {
+//                    event.preventDefault();
+//                    $location.path('/');
+//                }
+//            }
+//        }
+//     })
+// }])

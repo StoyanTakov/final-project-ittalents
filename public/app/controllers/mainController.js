@@ -12,17 +12,31 @@ angular.module('mainController', ['authServices','videoServices'])
         }
         $scope.loadMainVids = function(){
             Video.getMainVids().then(function(data){
-                app.videos = data.data;
+               if (data.data) {
+                   if (Array.isArray(data.data)) {
+                       app.videos = data.data;
+                    //    console.log(app.videos)
+                   }else{
+                       app.videos = []; // If there are no vids put a message
+                   }
+               }
             })
         }();
         app.searchByName = function(searchName){
             Video.getVideosByName(searchName).then(function(data){
-                app.videos = data.data;
+                if (data.data) {
+                    if (!data.data.success) {
+                    //  console.log(data.data)
+                        app.videos = data.data;
+                    }else{
+                        app.videos = [];
+                    }
+                }
             })
         }
-        //Adding a variable to make the angular to load only when it's checking for the user
-        //and using ng-cloak in the index.html
-        $scope.loadMe = false;
+        // //Adding a variable to make the angular to load only when it's checking for the user
+        // //and using ng-cloak in the index.html
+        // $scope.loadMe = false;
         // Watching for changes in the routes when we check for the user if he is logged in
         $rootScope.$on('$routeChangeStart', function () {
             //Checking if the user is logged in and using the username
@@ -30,11 +44,11 @@ angular.module('mainController', ['authServices','videoServices'])
                 Auth.getUser().then(function (data) {
                     app.isLoggedIn = true;
                     app.username = data.data.username;
-                    $scope.loadMe = true;
+                    // $scope.loadMe = true;
                 });
             } else {
                 app.isLoggedIn = false;
-                $scope.loadMe = true;
+                // $scope.loadMe = true;
             }
             if ($location.hash()=='_=_') { //Removing the additional url signs from facebook
                 $location.hash(null);

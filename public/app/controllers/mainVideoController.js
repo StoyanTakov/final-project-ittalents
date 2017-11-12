@@ -1,13 +1,14 @@
 angular.module('mainVideoController', ['videoServices'])
     .controller('mainVideoController', function ($scope,Video,$location) {  
-        var video = {};
-       
+       var mainVid = this;
         var loadVid = function(){
             var name = $location.$$path.split('/')[2];
+            console.log(name)
             Video.getVid(name).then(function(data){
-                video = data.data;   
-                $scope.video = video;
-               
+                if (data.data) {
+                    mainVid.video = data.data;
+                    console.log(mainVid.video)
+                }   
                 document.getElementById('mainVideo').load();
             })
         }();
@@ -23,7 +24,6 @@ angular.module('mainVideoController', ['videoServices'])
                 $scope.showInfoText = "Show";
                 $scope.showDescription = true;
             }
-
         }
         $scope.shareMenu = true;
         $scope.showShareMenu = showShareMenu;
@@ -34,5 +34,4 @@ angular.module('mainVideoController', ['videoServices'])
                 $scope.shareMenu = true;
             }
         }
-        
     })

@@ -11,6 +11,7 @@ var path = require('path');
 var passport = require('passport');
 var social = require('./app/passport/passport')(app, passport);
 var fs = require('fs');
+var Video = require("./app/models/video");
 // MIDDLEWARES
 //allow cross origin requests for the uploads
 app.use(function (req, res, next) {
@@ -73,7 +74,38 @@ app.get('/stream/:url', function (req, res) {
     fs.createReadStream(path).pipe(res)
   }
 })
-
+  // Getting all videos in the data
+app.get('/api/allVideos', function (req, res) {
+    Video.find({}).exec(function (err, videos) {
+        // console.log(req.decoded)
+        // console.log(video)
+        if (videos !== null) {
+            res.send(videos);
+        } else {
+            res.json({ success: false });
+        }
+    })
+})
+    //API for getting a specific video
+app.get('/api/video/:name', function (req, res) {
+  Video.findOne({ url: req.params.name }).exec(function (err, videos) {
+      // console.log(req.decoded)
+      // console.log(video)
+      if (videos !== null) {
+          res.send(videos);
+      }
+  })
+      //API for searching videos
+  app.get('/api/searchVideos/:name', function (req, res) {
+      Video.find({ name: req.params.name }).exec(function (err, videos) {
+          // console.log(req.decoded)
+          console.log(videos)
+          if (videos !== null) {
+              res.send(videos);
+          }
+      })
+  })
+})
 //Responding with the index.html when entering the website
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname + "/public/app/views/index.html"));

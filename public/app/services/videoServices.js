@@ -12,7 +12,7 @@ angular.module('videoServices',[])
         return $http.get('/api/ownVideos')
     }
     videoFactory.searchVids = function(name){
-        return $http.get('/searchVideos/'+name)
+        return $http.get('/api/searchVideos/'+name)
     }
 
     return videoFactory;

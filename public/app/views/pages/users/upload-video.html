@@ -5,17 +5,17 @@
             <form name="up.upload_form">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" ng-model="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Name">
+                    <input type="text" ng-model="up.name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Name">
                     <small id="nameHelp" class="form-text text-muted">Choose name for the video</small>
                 </div>
                 <div class="form-group">
                     <label for="tags">Tags</label>
-                    <input type="text" ng-model="tags" class="form-control" id="tags" aria-describedby="tagsHelp" placeholder="Tags">
+                    <input type="text" ng-model="up.tags" class="form-control" id="tags" aria-describedby="tagsHelp" placeholder="Tags">
                     <small id="tagsHelp" class="form-text text-muted">Separate each tag with space</small>
                 </div>
                 <div class="form-group">
                     <label for="categories">Categories</label>
-                    <select class="form-control" id="categories" ng-model="categories">
+                    <select class="form-control" id="categories" ng-model="up.categories">
                         <option value="music">Music</option>
                         <option value="sports">Sports</option>
                         <option value="entertainment">Entertainment</option>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="5" ng-model="description"></textarea>
+                    <textarea class="form-control" id="description" rows="5" ng-model="up.description"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
