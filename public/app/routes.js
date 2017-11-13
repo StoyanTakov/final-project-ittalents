@@ -6,6 +6,10 @@ var app = angular.module('appRoutes', ['ngRoute'])
                 templateUrl: 'app/views/pages/home-page.html',
                 // authenticated: false
             })
+            .when('/search', {
+                templateUrl: 'app/views/pages/search-page.html',
+                // authenticated: false
+            })
             .when('/video/:name', {
                 templateUrl: 'app/views/pages/video-page.html',
                 controller: "mainVideoController",
@@ -69,7 +73,7 @@ var app = angular.module('appRoutes', ['ngRoute'])
             requireBase: false
         });
     });
-    //Restricting routes if you are logged in or not while using an additional variable 'authenticated' in every route
+//Restricting routes if you are logged in or not while using an additional variable 'authenticated' in every route
 // app.run(['$rootScope','Auth','$location', function ($rootScope, Auth,$location) {
 //     $rootScope.$on('$routeChangeStart' , function (event, next, current) {
 //        if (next.$$route.authenticated==true) {

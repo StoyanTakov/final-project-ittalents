@@ -3,11 +3,9 @@ angular.module('mainVideoController', ['videoServices'])
        var mainVid = this;
         var loadVid = function(){
             var name = $location.$$path.split('/')[2];
-            console.log(name)
             Video.getVid(name).then(function(data){
                 if (data.data) {
                     mainVid.video = data.data;
-                    console.log(mainVid.video)
                 }   
                 document.getElementById('mainVideo').load();
             })

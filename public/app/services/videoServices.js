@@ -11,9 +11,10 @@ angular.module('videoServices',[])
     videoFactory.getOwnVids = function(){
         return $http.get('/api/ownVideos')
     }
-    videoFactory.searchVids = function(title){
-        return $http.get('/api/searchVideos/'+title)
-    }
+    // videoFactory.searchVids = function(title){
+    //     console.log(title)
+    //     return $http.get('/api/searchVideos/'+title)
+    // }
 
     return videoFactory;
 })

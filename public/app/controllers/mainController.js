@@ -14,8 +14,6 @@ angular.module('mainController', ['authServices', 'videoServices'])
             if (app.isSearching) {
                 $location.path('/')
                 app.isSearching = false;
-                app.searchedVids = [];
-                app.videos = data.data;
             } else {
                 Video.getMainVids().then(function (data) {
                     if (data.data) {
@@ -26,14 +24,36 @@ angular.module('mainController', ['authServices', 'videoServices'])
         };
         $scope.loadMainVids();
         app.searchByTitle = function (searchTitle) {
-            Video.searchVids(searchTitle).then(function (data) {
-                isSearching = true;
-                if (data.data) {
-                    app.videos = [];
-                    app.searchedVids = data.data;
-                    console.log(data);
-                }
-            })
+            searchTitle = searchTitle.toLowerCase();
+            if (app.isSearching) {
+                Video.getMainVids().then(function (data) {
+                    if (data.data) {
+                        app.videos = data.data;
+                        app.searchedVids = app.videos.filter(function (vid) {
+                            if (vid.title.toLowerCase().indexOf(searchTitle) !== -1) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        })
+                    }
+                })
+            } else {
+                $location.path('/search');
+                app.isSearching = true;
+                Video.getMainVids().then(function (data) {
+                    if (data.data) {
+                        app.videos = data.data;
+                        app.searchedVids = app.videos.filter(function (vid) {
+                            if (vid.title.toLowerCase().indexOf(searchTitle) !== -1) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        })
+                    }
+                })
+            }
         }
         // //Adding a variable to make the angular to load only when it's checking for the user
         // //and using ng-cloak in the index.html

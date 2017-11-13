@@ -1,15 +1,10 @@
 <div class="page-header">
     <h1>Vids</h1>
     <div id='video-section'>
-        <div ng-repeat="vid in main.videos " ng-hide="main.isSearching">
+        <div ng-repeat="vid in main.videos">
             <a ng-href="/video/{{vid.name}}" class='vidImgs'><img src="assets/img/video-img.jpg" class="tumbnail" alt="click video"></a>
             <span>{{vid.title}}</span>
             <span>{{vid.publisher}}</span>
-        </div>
-        <div ng-repeat="searchedVid in main.searchedVids track by $index" ng-show="main.isSearching">
-            <a ng-href="/video/{{searchedVid.name}}" class='vidImgs'><img src="assets/img/video-img.jpg" class="tumbnail" alt="click video"></a>
-            <span>{{searchedVid.title}}</span>
-            <span>{{searchedVid.publisher}}</span>
         </div>
     </div>
 </div>
