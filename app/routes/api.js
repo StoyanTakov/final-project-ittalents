@@ -300,6 +300,7 @@ module.exports = function (router) {
     })
 
     // API for the video details
+    // For liking videos
     router.get('/likes/:id', function (req, res) {
         if (req.decoded) {
             var user = {};
@@ -405,6 +406,7 @@ module.exports = function (router) {
             });
         }
     })
+    // For disliking videos
     router.get('/dislikes/:id', function (req, res) {
         if (req.decoded) {
             var user = {};
@@ -510,6 +512,42 @@ module.exports = function (router) {
             });
         }
     })
-
+    // For the views
+    router.get('/views/:id',function (req,res){
+        var video = {};
+        Video.findOne({_id: req.params.id}).exec(function(err,foundVideo){
+            if (err) {
+                console.log(err);
+            }else{
+                video = foundVideo;
+                video.publishInfo.views++;
+                if (req.decoded) {
+                    var user = {};
+                    User.findOne({email: req.decoded.email}).exec(function(err,foundUser){
+                        if (err) {
+                            console.log(err);
+                        }else{
+                            user = foundUser;
+                            if (user.history.length==0 || user.history.indexOf(video._id)!==user.history.length-1) {
+                                user.history.push(video._id);
+                                User.update({_id:user._id},user,function(err,raw){
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+                video.save(function(err){
+                    if (err) {
+                        console.log(err)
+                    }else{
+                        res.json({success: true, message:'Video viewed',views: video.publishInfo.views})
+                    }
+                })
+            }
+        })
+    })
     return router;
 }

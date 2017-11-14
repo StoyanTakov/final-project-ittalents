@@ -9,6 +9,11 @@ angular.module('mainVideoController', ['videoServices'])
                     mainVid.video = data.data;
                 }   
                 document.getElementById('mainVideo').load();
+                VideoDetails.view(mainVid.video._id).then(function(data){
+                    if (data.data.success) {
+                        mainVid.video.publishInfo.views = data.data.views;
+                    }
+                })
             })
         }();
        

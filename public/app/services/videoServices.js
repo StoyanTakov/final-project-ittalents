@@ -29,5 +29,8 @@ angular.module('videoServices',[])
     videoDetailsFactory.comment = function(id,comment){
         return $http.post('/api/comments/'+id,comment);
     }
+    videoDetailsFactory.view = function(id){
+        return $http.get('/api/views/'+id);
+    }
     return videoDetailsFactory;
 })

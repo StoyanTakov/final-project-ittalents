@@ -87,6 +87,9 @@ var UserSchema = new Schema({
     },
     subscribes: {
         type: Array
+    },
+    history:{
+        type: Array
     }
 })
 
