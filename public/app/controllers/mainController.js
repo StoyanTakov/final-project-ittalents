@@ -24,7 +24,7 @@ angular.module('mainController', ['authServices', 'videoServices'])
             }
         };
         $scope.loadMainVids();
-        var getAndSortVids = function(){
+        var getAndSortVids = function(searchTitle){
             Video.getMainVids().then(function (data) {
                 if (data.data) {
                     app.videos = data.data;
@@ -35,19 +35,25 @@ angular.module('mainController', ['authServices', 'videoServices'])
                             return 0;
                         }
                     })
+                    
                 }
             })
         }
         // Checking if already in search page if not redirect to it
         app.searchByTitle = function (searchTitle) {
-            searchTitle = searchTitle.toLowerCase();
-            if (app.isSearching) {
-                getAndSortVids();
-            } else {
-                $location.path('/search');
-                app.isSearching = true;
-                getAndSortVids();
+            if (!searchTitle) {
+                $location.path('/');
+            }else{
+                searchTitle = searchTitle.toLowerCase().trim();
+                if (app.isSearching) {
+                    getAndSortVids(searchTitle);
+                } else {
+                    $location.path('/search');
+                    app.isSearching = true;
+                    getAndSortVids(searchTitle);
+                }
             }
+            
         }
         // //Adding a variable to make the angular to load only when it's checking for the user
         // //and using ng-cloak in the index.html
