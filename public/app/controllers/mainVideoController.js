@@ -36,15 +36,19 @@ angular.module('mainVideoController', ['videoServices'])
        
         mainVid.like = function(){
             VideoDetails.like(mainVid.video._id).then(function(data){
-                mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
-                mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
+                if (data.data.success) {
+                    mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
+                    mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
+                }
                 // console.log(data.data)
             })
         }
         mainVid.dislike = function(){
             VideoDetails.dislike(mainVid.video._id).then(function(data){
-                mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
-                mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
+                if (data.data.success) {
+                    mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
+                    mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
+                }
                 // console.log(data.data)
             })
         }
