@@ -10,7 +10,7 @@ angular.module('mainController', ['authServices', 'videoServices'])
                 $scope.menuVisible = true;
             }
         }
-        // Load all vids on home page
+        // Load all vids on home page if not on home page - redirect to it
         $scope.loadMainVids = function () {
             if (app.isSearching) {
                 $location.path('/')

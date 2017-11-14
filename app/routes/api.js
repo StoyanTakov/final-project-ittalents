@@ -15,6 +15,9 @@ module.exports = function (router) {
         user.username = req.body.username;
         user.password = req.body.password;
         user.email = req.body.email;
+        user.dislikedVideos = [];
+        user.likedVideos = [];
+        user.subscribes = [];
         if (req.body.username == null || req.body.username == '' || req.body.email == null ||
             req.body.password == null || req.body.password == '' || req.body.email == '' ||
             req.body.name == null || req.body.name == '') {
@@ -172,10 +175,10 @@ module.exports = function (router) {
     router.post('/me', function (req, res) {
         if (req.decoded) {
             res.send(req.decoded);
-        }else{
+        } else {
             res.send(req.errorMsg);
         }
-       
+
     })
 
 
@@ -205,11 +208,8 @@ module.exports = function (router) {
                 });
                 return;
             }
-            res.json({
-                error_code: 0,
-                err_desc: null
-            });
 
+            // Setting values for the video
             var vid = new Video();
             vid.name = req.file.filename;
             vid.title = req.body.title;
@@ -222,7 +222,18 @@ module.exports = function (router) {
             vid.publishInfo.description = req.body.description;
 
             vid.save(function (err) {
-                console.log(err)
+                if (err) {
+                    res.json({
+                        success: false,
+                        message: err
+                    })
+                } else {
+                    res.json({
+                        error_code: 0,
+                        err_desc: null
+                    });
+                }
+
             })
         })
     });
@@ -248,20 +259,22 @@ module.exports = function (router) {
                 res.send(videos);
             }
         })
-        //API for searching videos
-        router.get('/searchVideos/:title', function (req, res) {
-            Video.find({
-                title: {
-                    $regex: /req.params.title/i
-                }
-            }).exec(function (err, videos) {
-                console.log(videos)
-                if (videos !== null) {
-                    res.send(videos);
-                }
-            })
-        })
     })
+    //     //API for searching videos
+    //     router.get('/searchVideos/:title', function (req, res) {
+    //         Video.find({
+    //             title: {
+    //                 $regex: /req.params.title/i
+    //             }
+    //         }).exec(function (err, videos) {
+    //             console.log(videos)
+    //             if (videos !== null) {
+    //                 res.send(videos);
+    //             }
+    //         })
+    //     })
+    // })
+    // Getting the uploaded videos by the logged in user
     router.get('/ownVideos', function (req, res) {
         if (req.decoded) {
             Video.find({
@@ -275,12 +288,227 @@ module.exports = function (router) {
                         success: false
                     });
                 }
-    
+
             })
-        }else{
-            res.json({success: false, message: 'Not logged in with a valid token!'})
+        } else {
+            res.json({
+                success: false,
+                message: 'Not logged in with a valid token!'
+            })
         }
-       
+
+    })
+
+    // API for the video details
+    router.get('/likes/:id', function (req, res) {
+        if (req.decoded) {
+            var user = {};
+            var video = {};
+            var likesAndDislikes = {};
+            User.findOne({
+                email: req.decoded.email
+            }).exec(function (err, foundUser) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    user = foundUser;
+                    Video.findOne({
+                        _id: req.params.id
+                    }).exec(function (err, foundVideo) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            video = foundVideo;
+                            if (user.email == video.publisher) {
+                                res.json({
+                                    success: false,
+                                    message: "You cannot like your own videos."
+                                })
+                            } else {
+                                //If the video is already liked
+                                if (user.likedVideos.indexOf(video._id) !== -1) {
+                                    video.publishInfo.likes--;
+                                    var videoIndex = user.likedVideos.indexOf(video._id);
+                                    user.likedVideos.splice(videoIndex, 1);
+                                    User.update({_id: user._id},user,function (err,raw) {
+                                        if (err) {
+                                            console.log(err);
+                                        }
+                                    })
+                                    video.save(function (err) {
+                                        if (err) {
+                                            console.log(err)
+                                        }
+                                        likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes}
+                                        res.json({
+                                            success: true,
+                                            message: 'Removed like',
+                                            likesAndDislikes
+                                        });
+                                    })
+                                } else {
+                                    // If the video is already disliked
+                                    if (user.dislikedVideos.indexOf(video._id) !== -1) {
+                                        video.publishInfo.likes++;
+                                        video.publishInfo.dislikes--;
+                                        var videoIndex = user.dislikedVideos.indexOf(video._id);
+                                        user.dislikedVideos.splice(videoIndex, 1);
+                                        user.likedVideos.push(video._id);
+                                        User.update({_id: user._id},user,function (err,raw) {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                        })
+                                        video.save(function (err) {
+                                            if (err) {
+                                                console.log(err)
+                                            }
+                                            likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                            res.json({
+                                                success: true,
+                                                message: 'Liked',
+                                                likesAndDislikes
+                                            });
+                                        })
+                                    } else {
+                                        // If the video isn't liked or disliked
+                                        video.publishInfo.likes++;
+                                        user.likedVideos.push(video._id);
+                                        User.update({_id: user._id},user,function (err,raw) {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                        })
+                                        video.save(function (err) {
+                                            if (err) {
+                                                console.log(err)
+                                            }
+                                            likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                            res.json({
+                                                success: true,
+                                                message: 'Liked',
+                                                likesAndDislikes
+                                            });
+                                        })
+                                    }
+                                }
+                            }
+                        }
+
+                    })
+                }
+            })
+        } else {
+            res.json({
+                success: false,
+                message: 'Login to like the video!'
+            });
+        }
+    })
+    router.get('/dislikes/:id', function (req, res) {
+        if (req.decoded) {
+            var user = {};
+            var video = {};
+            var  likesAndDislikes = {};
+            User.findOne({
+                email: req.decoded.email
+            }).exec(function (err, foundUser) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    user = foundUser;
+                    Video.findOne({
+                        _id: req.params.id
+                    }).exec(function (err, foundVideo) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            video = foundVideo;
+                            if (user.email == video.publisher) {
+                                res.json({
+                                    success: false,
+                                    message: "You cannot like your own videos."
+                                })
+                            } else {
+                                //If the video is already disliked
+                                if (user.dislikedVideos.indexOf(video._id) !== -1) {
+                                    video.publishInfo.dislikes--;
+                                    var videoIndex = user.dislikedVideos.indexOf(video._id);
+                                    user.dislikedVideos.splice(videoIndex, 1);
+                                    User.update({_id: user._id},user,function (err,raw) {
+                                        if (err) {
+                                            console.log(err);
+                                        }
+                                    })
+                                    video.save(function (err) {
+                                        if (err) {
+                                            console.log(err)
+                                        }
+                                        likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                        res.json({
+                                            success: true,
+                                            message: 'Removed dislike',
+                                            likesAndDislikes
+                                        });
+                                    })
+                                } else {
+                                    // If the video is already liked
+                                    if (user.likedVideos.indexOf(video._id) !== -1) {
+                                        video.publishInfo.likes--;
+                                        video.publishInfo.dislikes++;
+                                        var videoIndex = user.likedVideos.indexOf(video._id);
+                                        user.likedVideos.splice(videoIndex, 1);
+                                        user.dislikedVideos.push(video._id);
+                                        User.update({_id: user._id},user,function (err,raw) {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                        })
+                                        video.save(function (err) {
+                                            if (err) {
+                                                console.log(err)
+                                            }
+                                            likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                            res.json({
+                                                success: true,
+                                                message: 'Disliked',
+                                                likesAndDislikes
+                                            });
+                                        })
+                                    } else {
+                                        // If the video isn't liked or disliked
+                                        video.publishInfo.dislikes++;
+                                        user.dislikedVideos.push(video._id);
+                                        User.update({_id: user._id},user,function (err,raw) {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                        })
+                                        video.save(function (err) {
+                                            if (err) {
+                                                console.log(err)
+                                            }
+                                            likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                            res.json({
+                                                success: true,
+                                                message: 'Disliked',
+                                                likesAndDislikes
+                                            });
+                                        })
+                                    }
+                                }
+                            }
+                        }
+
+                    })
+                }
+            })
+        } else {
+            res.json({
+                success: false,
+                message: 'Login to dislike the video!'
+            });
+        }
     })
 
     return router;

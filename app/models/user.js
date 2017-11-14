@@ -79,6 +79,15 @@ var UserSchema = new Schema({
         unique: true,
         validate: emailValidator
     },
+    likedVideos: {
+        type: Array
+    },
+    dislikedVideos: {
+        type: Array
+    },
+    subscribes: {
+        type: Array
+    }
 })
 
 UserSchema.pre('save', function (next) {

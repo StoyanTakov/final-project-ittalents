@@ -20,8 +20,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-
+// Logging requests
 app.use(morgan("dev"));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -40,7 +41,7 @@ mongoose.connect('mongodb://localhost:27017/youtubedb', function (err) {
   }
 });
 
-
+// Streaming a video
 app.get('/stream/:url', function (req, res) {
   const path = './uploads/' + req.params.url;
   const stat = fs.statSync(path)

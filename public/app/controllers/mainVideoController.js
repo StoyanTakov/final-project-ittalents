@@ -1,8 +1,9 @@
 angular.module('mainVideoController', ['videoServices'])
-    .controller('mainVideoController', function ($scope,Video,$location) {  
+    .controller('mainVideoController', function ($scope,Video,$location,VideoDetails) {  
        var mainVid = this;
+       var path =  $location.$$path;
         var loadVid = function(){
-            var name = $location.$$path.split('/')[2];
+            var name = path.split('/')[2];
             Video.getVid(name).then(function(data){
                 if (data.data) {
                     mainVid.video = data.data;
@@ -31,5 +32,20 @@ angular.module('mainVideoController', ['videoServices'])
             } else {
                 $scope.shareMenu = true;
             }
+        }
+       
+        mainVid.like = function(){
+            VideoDetails.like(mainVid.video._id).then(function(data){
+                mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
+                mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
+                // console.log(data.data)
+            })
+        }
+        mainVid.dislike = function(){
+            VideoDetails.dislike(mainVid.video._id).then(function(data){
+                mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
+                mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
+                // console.log(data.data)
+            })
         }
     })
