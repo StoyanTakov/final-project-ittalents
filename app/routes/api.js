@@ -128,8 +128,8 @@ module.exports = function (router) {
                             username: user.username,
                             email: user.email
                         }, secret, {
-                                expiresIn: '24h'
-                            });
+                            expiresIn: '24h'
+                        });
                         res.json({
                             success: true,
                             message: "User authenticated!",
@@ -157,15 +157,25 @@ module.exports = function (router) {
                 }
             })
         } else {
-            res.json({
+            req.errorMsg = {
                 success: false,
                 message: "No token provided."
-            })
+            }
+            next();
+            // res.json({
+            //     success: false,
+            //     message: "No token provided."
+            // })
         }
     })
 
     router.post('/me', function (req, res) {
-        res.send(req.decoded)
+        if (req.decoded) {
+            res.send(req.decoded);
+        }else{
+            res.send(req.errorMsg);
+        }
+       
     })
 
 
@@ -217,17 +227,61 @@ module.exports = function (router) {
         })
     });
 
-    router.get('/ownVideos', function (req, res) {
-        Video.find({ publisher: req.decoded.email }).exec(function (err, videos) {
+    // Getting all videos in the data
+    router.get('/allVideos', function (req, res) {
+        Video.find({}).exec(function (err, videos) {
             if (videos !== null) {
-                // console.log(videos)
                 res.send(videos);
             } else {
-                res.json({ success: false });
+                res.json({
+                    success: false
+                });
             }
-
         })
     })
+    //API for getting a specific video
+    router.get('/video/:name', function (req, res) {
+        Video.findOne({
+            name: req.params.name
+        }).exec(function (err, videos) {
+            if (videos !== null) {
+                res.send(videos);
+            }
+        })
+        //API for searching videos
+        router.get('/searchVideos/:title', function (req, res) {
+            Video.find({
+                title: {
+                    $regex: /req.params.title/i
+                }
+            }).exec(function (err, videos) {
+                console.log(videos)
+                if (videos !== null) {
+                    res.send(videos);
+                }
+            })
+        })
+    })
+    router.get('/ownVideos', function (req, res) {
+        if (req.decoded) {
+            Video.find({
+                publisher: req.decoded.email
+            }).exec(function (err, videos) {
+                if (videos !== null) {
+                    // console.log(videos)
+                    res.send(videos);
+                } else {
+                    res.json({
+                        success: false
+                    });
+                }
     
+            })
+        }else{
+            res.json({success: false, message: 'Not logged in with a valid token!'})
+        }
+       
+    })
+
     return router;
 }

@@ -74,35 +74,7 @@ app.get('/stream/:url', function (req, res) {
     fs.createReadStream(path).pipe(res)
   }
 })
-  // Getting all videos in the data
-app.get('/api/allVideos', function (req, res) {
-    Video.find({}).exec(function (err, videos) {
-        if (videos !== null) {
-            res.send(videos);
-        } else {
-            res.json({ success: false });
-        }
-    })
-})
-    //API for getting a specific video
-app.get('/api/video/:name', function (req, res) {
-  Video.findOne({ name: req.params.name }).exec(function (err, videos) {
-      // console.log(video)
-      if (videos !== null) {
-          res.send(videos);
-      }
-  })
-      //API for searching videos
-app.get('/api/searchVideos/:title', function (req, res) {
-    console.log(12314)
-      Video.find({ title: {$regex: /req.params.title/i } }).exec(function (err, videos) {
-          console.log(videos)
-          if (videos !== null) {
-              res.send(videos);
-          }
-      })
-  })
-})
+
 //Responding with the index.html when entering the website
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname + "/public/app/views/index.html"));

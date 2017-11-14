@@ -10,6 +10,7 @@ angular.module('mainController', ['authServices', 'videoServices'])
                 $scope.menuVisible = true;
             }
         }
+        // Load all vids on home page
         $scope.loadMainVids = function () {
             if (app.isSearching) {
                 $location.path('/')
@@ -23,36 +24,29 @@ angular.module('mainController', ['authServices', 'videoServices'])
             }
         };
         $scope.loadMainVids();
+        var getAndSortVids = function(){
+            Video.getMainVids().then(function (data) {
+                if (data.data) {
+                    app.videos = data.data;
+                    app.searchedVids = app.videos.filter(function (vid) {
+                        if (vid.title.toLowerCase().indexOf(searchTitle) !== -1) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    })
+                }
+            })
+        }
+        // Checking if already in search page if not redirect to it
         app.searchByTitle = function (searchTitle) {
             searchTitle = searchTitle.toLowerCase();
             if (app.isSearching) {
-                Video.getMainVids().then(function (data) {
-                    if (data.data) {
-                        app.videos = data.data;
-                        app.searchedVids = app.videos.filter(function (vid) {
-                            if (vid.title.toLowerCase().indexOf(searchTitle) !== -1) {
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        })
-                    }
-                })
+                getAndSortVids();
             } else {
                 $location.path('/search');
                 app.isSearching = true;
-                Video.getMainVids().then(function (data) {
-                    if (data.data) {
-                        app.videos = data.data;
-                        app.searchedVids = app.videos.filter(function (vid) {
-                            if (vid.title.toLowerCase().indexOf(searchTitle) !== -1) {
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        })
-                    }
-                })
+                getAndSortVids();
             }
         }
         // //Adding a variable to make the angular to load only when it's checking for the user
