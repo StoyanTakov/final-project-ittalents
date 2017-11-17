@@ -13,6 +13,9 @@ angular.module('videoServices',[])
     videoFactory.getOwnVids = function(){
         return $http.get('/api/ownVideos')
     }
+    videoFactory.getHistory = function(){
+        return $http.get('/api/history');
+    }
     return videoFactory;
 })
 .factory('VideoDetails',function($http){

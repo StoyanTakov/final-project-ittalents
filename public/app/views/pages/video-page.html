@@ -1,7 +1,10 @@
-<div class="container page-header">
+<div class="container">
     <div class="row video-background">
-        <div class="col-md-8">
-            <section class="container col-md-12">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>{{mainVid.video.title}}</h2>
+            </div>
+            <section class="col-md-12">
                 <div class="row video-block">
                     <div>
                         <video id='mainVideo'controls>
@@ -12,12 +15,6 @@
                 </div>
                 <div class="row video-func">
                     <div class="container">
-                        <div class="row title">
-                            <div class="col-md-12" >
-                                <h3>{{mainVid.video.title}}</h3>
-                            </div>
-                        </div>
-
                         <div class="row action-row">
                             <div class="col-md-2">
                                 <span>
@@ -121,14 +118,14 @@
                 </div>
             </section>
         </div>
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
             <aside class="row related-vid">
                 <section class="col-md-5">
                     <a href="">
                         <img src={{video.snippet.thumbnails.default.url}} alt="vidPicture">
                     </a>
                 </section>
-        </div>
+        </div> -->
         </aside>
     </div>
 </div>

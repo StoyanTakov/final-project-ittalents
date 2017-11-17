@@ -29,11 +29,7 @@ angular.module('mainController', ['authServices', 'videoServices'])
                 if (data.data) {
                     app.videos = data.data;
                     app.searchedVids = app.videos.filter(function (vid) {
-                        if (vid.title.toLowerCase().indexOf(searchTitle) !== -1) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
+                        return vid.title.toLowerCase().indexOf(searchTitle)>-1;
                     })
                     
                 }
@@ -53,7 +49,6 @@ angular.module('mainController', ['authServices', 'videoServices'])
                     getAndSortVids(searchTitle);
                 }
             }
-            
         }
         // //Adding a variable to make the angular to load only when it's checking for the user
         // //and using ng-cloak in the index.html

@@ -1,0 +1,9 @@
+<div class="page-header">
+        <h1>History</h1>
+        <div class="videos-section">
+            <div ng-repeat="vid in history.videos" class="col-md-3">
+                <p>{{vid.title}}</p>
+                <a ng-href="/video/{{vid.name}}" class='vidImgs'><img src="assets/img/video-img.jpg" class="tumbnail" alt="click video"></a>     
+            </div>
+        </div>
+</div>

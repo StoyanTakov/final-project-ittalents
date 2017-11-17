@@ -45,7 +45,7 @@ angular.module('mainVideoController', ['videoServices'])
                     mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
                     mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
                 }
-                // console.log(data.data)
+                console.log(data.data)
             })
         }
         mainVid.dislike = function(){

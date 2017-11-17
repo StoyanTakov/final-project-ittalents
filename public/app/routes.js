@@ -10,6 +10,13 @@ var app = angular.module('appRoutes', ['ngRoute'])
                 templateUrl: 'app/views/pages/search-page.html',
                 // authenticated: false
             })
+            .when('/history',{
+                templateUrl: 'app/views/pages/history.html',
+                controller: 'historyController',
+                controllerAs: 'history'
+                // authenticated: true
+            }
+        )
             .when('/video/:name', {
                 templateUrl: 'app/views/pages/video-page.html',
                 controller: "mainVideoController",

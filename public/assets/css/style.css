@@ -1,15 +1,14 @@
 /* main page css */
 body{
-    background-image: url(../img/background-pic.jpg);
+    background-image: url(http://getwallpapers.com/wallpaper/full/9/3/5/88934.jpg);
     background-repeat:no-repeat;
     background-size: cover;
+    color: rgb(213, 59, 59) !important;
+    font-weight: bold;
 }
 a>img{
     width: 20px;
     opacity: 0.6;
-}
-nav.navbar{
-    background-color: lightblue;
 }
 /* video page css */
 header{
@@ -108,8 +107,10 @@ header{
 #uploadVid{
     width: 100%;
 }
-.vidImgs{
-    width: 100%;
+.videos-section>div{
+    margin-top: 1%;
+    text-align: center;
+    font-size: 2em;
 }
 .login-container{
     background-color: whitesmoke;

@@ -29,6 +29,8 @@
     <script src="app/controllers/registerController.js"></script>
     <script src="app/controllers/uploadVideoControllers.js"></script>
     <script src="app/controllers/profileControllers.js"></script>
+    <script src="app/controllers/historyController.js"></script>
+
     <!-- Services -->
     <script src="app/services/userServices.js"></script>
     <script src="app/services/authServices.js"></script>
@@ -85,39 +87,11 @@
         </div>
     </nav>
     <div class="container col-md-2" ng-show="menuVisible">
-        <div class='row'>
-            <ul class="nav navbar-nav">
-                <li ng-click="showMenu()">
-                    <a href="#">
-                        <img id='menu-btn' src="../assets/img/menu-button.png" alt="menu">
-                    </a>
-                </li>
-                <li class="active">
-                    <a ng-href="/">Tubata</a>
-                </li>
-            </ul>
-        </div>
         <ul>
-            <li>Начало</li>
-            <li>Набиращи популярност</li>
-            <li>Абонаменти</li>
-        </ul>
-        <a href="">Библиотека</a>
-        <ul>
-            <li>История</li>
-            <li>За гледане по-късно</li>
-            <li>Харесани видеоклипове</li>
-        </ul>
-        <a href="">Абонаменти</a>
-        <br>
-        <a href="">Сърфиране на канала</a>
-        <ul>
-            <li>
-                <a href="">Настройки</a>
-            </li>
-            <li>
-                <a href="">Помощ</a>
-            </li>
+            <li><a href="/subscriptions">Subscriptions</a></li>
+            <li><a href="/history">History</a></li>
+            <li><a href="/watch-later">Watch later</a></li>
+            <li><a href="/liked-videos">Liked videos</a></li>
         </ul>
     </div>
     <div ng-view class='col-md-10'></div>

@@ -327,9 +327,10 @@ module.exports = function (router) {
                                 })
                             } else {
                                 //If the video is already liked
-                                if (user.likedVideos.indexOf(video._id) !== -1) {
+                                console.log(video)
+                                if (user.likedVideos.find(likedVid => likedVid._id.toString() == video._id.toString())) {
                                     video.publishInfo.likes--;
-                                    var videoIndex = user.likedVideos.indexOf(video._id);
+                                    var videoIndex = user.likedVideos.findIndex(likedVid => likedVid._id.toString() == video._id.toString());
                                     user.likedVideos.splice(videoIndex, 1);
                                     User.update({_id: user._id},user,function (err,raw) {
                                         if (err) {
@@ -349,12 +350,12 @@ module.exports = function (router) {
                                     })
                                 } else {
                                     // If the video is already disliked
-                                    if (user.dislikedVideos.indexOf(video._id) !== -1) {
+                                    if (user.dislikedVideos.find(dislikedVid => dislikedVid._id.toString() == video._id.toString())) {
                                         video.publishInfo.likes++;
                                         video.publishInfo.dislikes--;
-                                        var videoIndex = user.dislikedVideos.indexOf(video._id);
+                                        var videoIndex = user.dislikedVideos.findIndex(dislikedVid => dislikedVid._id.toString() == video._id.toString());
                                         user.dislikedVideos.splice(videoIndex, 1);
-                                        user.likedVideos.push(video._id);
+                                        user.likedVideos.push(video);
                                         User.update({_id: user._id},user,function (err,raw) {
                                             if (err) {
                                                 console.log(err);
@@ -374,7 +375,7 @@ module.exports = function (router) {
                                     } else {
                                         // If the video isn't liked or disliked
                                         video.publishInfo.likes++;
-                                        user.likedVideos.push(video._id);
+                                        user.likedVideos.push(video);
                                         User.update({_id: user._id},user,function (err,raw) {
                                             if (err) {
                                                 console.log(err);
@@ -433,9 +434,9 @@ module.exports = function (router) {
                                 })
                             } else {
                                 //If the video is already disliked
-                                if (user.dislikedVideos.indexOf(video._id) !== -1) {
+                                if (user.dislikedVideos.find(dislikedVid => dislikedVid._id.toString() == video._id.toString())) {
                                     video.publishInfo.dislikes--;
-                                    var videoIndex = user.dislikedVideos.indexOf(video._id);
+                                    var videoIndex = user.dislikedVideos.findIndex(dislikedVid => dislikedVid._id.toString() == video._id.toString());
                                     user.dislikedVideos.splice(videoIndex, 1);
                                     User.update({_id: user._id},user,function (err,raw) {
                                         if (err) {
@@ -455,12 +456,12 @@ module.exports = function (router) {
                                     })
                                 } else {
                                     // If the video is already liked
-                                    if (user.likedVideos.indexOf(video._id) !== -1) {
+                                    if (user.likedVideos.find(likedVid => likedVid._id.toString() == video._id.toString())) {
                                         video.publishInfo.likes--;
                                         video.publishInfo.dislikes++;
-                                        var videoIndex = user.likedVideos.indexOf(video._id);
+                                        var videoIndex = user.likedVideos.findIndex(likedVid => likedVid._id.toString() == video._id.toString());
                                         user.likedVideos.splice(videoIndex, 1);
-                                        user.dislikedVideos.push(video._id);
+                                        user.dislikedVideos.push(video);
                                         User.update({_id: user._id},user,function (err,raw) {
                                             if (err) {
                                                 console.log(err);
@@ -480,7 +481,7 @@ module.exports = function (router) {
                                     } else {
                                         // If the video isn't liked or disliked
                                         video.publishInfo.dislikes++;
-                                        user.dislikedVideos.push(video._id);
+                                        user.dislikedVideos.push(video);
                                         User.update({_id: user._id},user,function (err,raw) {
                                             if (err) {
                                                 console.log(err);
@@ -528,8 +529,8 @@ module.exports = function (router) {
                             console.log(err);
                         }else{
                             user = foundUser;
-                            if (user.history.length==0 || user.history.indexOf(video._id)!==user.history.length-1) {
-                                user.history.push(video._id);
+                            if (user.history.length==0 || (user.history.findIndex(histVid => histVid._id.toString() == video._id.toString())!==user.history.length-1)) {
+                                user.history.push(video);
                                 User.update({_id:user._id},user,function(err,raw){
                                     if (err) {
                                         console.log(err);
@@ -548,6 +549,20 @@ module.exports = function (router) {
                 })
             }
         })
+    })
+
+
+    // History of the user
+    router.get('/history',function(req,res){
+        if(req.decoded){
+            User.findOne({ email: req.decoded.email}).select('history').exec(function(err,userHistory){
+                if (err) {
+                    console.log(err);
+                }else{
+                   res.send(userHistory.history)
+                }
+            })
+        }
     })
     return router;
 }
