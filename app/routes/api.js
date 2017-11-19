@@ -208,19 +208,18 @@ module.exports = function (router) {
                 });
                 return;
             }
-
             // Setting values for the video
             var vid = new Video();
             vid.name = req.file.filename;
             vid.title = req.body.title;
-            vid.publisher = req.decoded.email;
+            vid.publisher = req.decoded.username;
             vid.publishInfo.tags = req.body.tags;
             vid.publishInfo.categories = req.body.categories;
             vid.publishInfo.views = 0;
             vid.publishInfo.likes = 0;
             vid.publishInfo.dislikes = 0;
             vid.publishInfo.description = req.body.description;
-
+            vid.publishInfo.time = req.body.time;
             vid.save(function (err) {
                 if (err) {
                     res.json({
@@ -307,7 +306,7 @@ module.exports = function (router) {
             var video = {};
             var likesAndDislikes = {};
             User.findOne({
-                email: req.decoded.email
+                username: req.decoded.username
             }).exec(function (err, foundUser) {
                 if (err) {
                     console.log(err);
@@ -320,7 +319,7 @@ module.exports = function (router) {
                             console.log(err);
                         } else {
                             video = foundVideo;
-                            if (user.email == video.publisher) {
+                            if (user.username == video.publisher) {
                                 res.json({
                                     success: false,
                                     message: "You cannot like your own videos."
@@ -414,7 +413,7 @@ module.exports = function (router) {
             var video = {};
             var  likesAndDislikes = {};
             User.findOne({
-                email: req.decoded.email
+                username: req.decoded.username
             }).exec(function (err, foundUser) {
                 if (err) {
                     console.log(err);
@@ -427,7 +426,7 @@ module.exports = function (router) {
                             console.log(err);
                         } else {
                             video = foundVideo;
-                            if (user.email == video.publisher) {
+                            if (user.username == video.publisher) {
                                 res.json({
                                     success: false,
                                     message: "You cannot like your own videos."
@@ -524,13 +523,13 @@ module.exports = function (router) {
                 video.publishInfo.views++;
                 if (req.decoded) {
                     var user = {};
-                    User.findOne({email: req.decoded.email}).exec(function(err,foundUser){
+                    User.findOne({username: req.decoded.username}).exec(function(err,foundUser){
                         if (err) {
                             console.log(err);
                         }else{
                             user = foundUser;
-                            if (user.history.length==0 || (user.history.findIndex(histVid => histVid._id.toString() == video._id.toString())!==user.history.length-1)) {
-                                user.history.push(video);
+                            if (user.history.length==0 || (user.history.findIndex(histVid => histVid._id.toString() == video._id.toString())!==user.history[0])) {
+                                user.history.unshift(video);
                                 User.update({_id:user._id},user,function(err,raw){
                                     if (err) {
                                         console.log(err);
@@ -550,7 +549,41 @@ module.exports = function (router) {
             }
         })
     })
-
+    // Uploading comments
+    router.post('/comments/:id',function(req,res){
+        if (req.decoded) {
+            Video.findOne({ _id: req.params.id}).exec(function(err,video){
+                if (err) {
+                    console.log(err);
+                }else{
+                    if (req.body.comment) {
+                        var comment = {
+                            username: req.decoded.username,
+                            comment: req.body.comment,
+                            time: req.body.time
+                        }
+                        if (!video.comments) {
+                            video.comments = new Array();
+                            video.comments.push(comment)
+                        }else{
+                            video.comments.unshift(comment);
+                            
+                        } 
+                        video.save(function(err){
+                            if (err) {
+                                console.log(err)
+                            }else{
+                                res.json(video.comments)     
+                            }
+                        });
+                        
+                    }
+                }
+            })
+        }else{
+            res.json({success:false, message: 'Login to comment'})
+        }
+    })
 
     // History of the user
     router.get('/history',function(req,res){

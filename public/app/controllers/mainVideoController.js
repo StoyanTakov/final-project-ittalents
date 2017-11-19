@@ -38,23 +38,46 @@ angular.module('mainVideoController', ['videoServices'])
                 $scope.shareMenu = true;
             }
         }
-       
+       // Like button functionality
         mainVid.like = function(){
             VideoDetails.like(mainVid.video._id).then(function(data){
                 if (data.data.success) {
                     mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
                     mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
+                }else{
+                    if (data.data.success == false) {
+                        alert(data.data.message);
+                    }
                 }
-                console.log(data.data)
+
             })
         }
+        // Dislike button functionality
         mainVid.dislike = function(){
             VideoDetails.dislike(mainVid.video._id).then(function(data){
                 if (data.data.success) {
                     mainVid.video.publishInfo.dislikes = data.data.likesAndDislikes.dislikes;
                     mainVid.video.publishInfo.likes = data.data.likesAndDislikes.likes;
+                }else{
+                    if (data.data.success == false) {
+                        alert(data.data.message);
+                    }
                 }
-                // console.log(data.data)
             })
+        }
+        // Comment functionality
+        mainVid.commentUp = function(){
+            var comment = {
+                comment: mainVid.commentInput,
+                time: new Date().toJSON().slice(0,10).replace(/-/g,'/')
+            }
+            VideoDetails.comment(mainVid.video._id,comment).then(function(data){
+                console.log(data.data)
+                if (data.data.success==false) {
+                    alert(data.data.message);
+                }else{
+                    mainVid.video.comments = data.data;
+                }
+            });
         }
     })

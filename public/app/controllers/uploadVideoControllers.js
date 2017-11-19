@@ -9,10 +9,11 @@ angular.module('updateControllers', ['ngFileUpload'])
         self.upload = function (file) {
             Upload.upload({
                 url: 'http://localhost:8080/api/uploads/', //webAPI exposed to upload the file
-                data: { file: file , 'title':self.title,'description':self.description,'tags':self.tags,'categories':self.categories} //pass file as data, should be user ng-model
+                data: { file: file , 'title':self.title,'description':self.description,'tags':self.tags,
+                'categories':self.categories,'time': new Date().toJSON().slice(0,10).replace(/-/g,'/')} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if (resp.data.error_code === 0) { //validate success
-                    $window.alert('Success ' + resp.config.data.file.name + 'uploaded.');
+                    $window.alert('Success ' + resp.config.data.file.name + ' uploaded.');
                 } else {
                     $window.alert('an error occured');
                 }

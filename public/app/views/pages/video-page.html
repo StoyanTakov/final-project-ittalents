@@ -54,7 +54,7 @@
                 </div>
                 <div class="row video-info">
                     <div class="col-md-6">
-                        <p>USER PIC AND NAME</p>
+                        <p>{{mainVid.video.publisher}}</p>
                         <p>
                             <strong>Published at</strong> {{mainVid.video.publishInfo.time}}</p>
                     </div>
@@ -78,11 +78,9 @@
                 <div class="row video-description">
                     <div class="col-md-2" ng-hide="click">
                         <p>
-                            <strong>Description: </strong>
+                            <strong>Description </strong>
+                            <button class="btn btn-primary" ng-click="showInfo()">Show</button>
                         </p>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-primary" ng-click="showInfo()">{{mainVid.showInfoText}}</button>
                     </div>
                 </div>
                 <div class="row video-description-text" ng-hide="showDescription">
@@ -101,17 +99,19 @@
                     <div class="container">
                         <div class="row comment-write">
                             <div class="col-md-6">
-                                <img src="" alt="user-pic">
                                 <div class="form-group">
                                     <label for="comment">Comment:</label>
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                                    <textarea class="form-control" rows="5" id="comment" ng-model="mainVid.commentInput"></textarea>
                                 </div>
-                                <button class="btn">COMMENT</button>
+                                <button class="btn" ng-click='mainVid.commentUp()'>COMMENT</button>
                             </div>
                         </div>
-                        <div class="row users-comments">
+                        <div class="row users-comments" ng-repeat="comment in mainVid.video.comments">
                             <div class="col-md-12">
-                                {{mainVid.comments}}
+                                <h3>{{comment.username}}</h3>
+                                <p>{{comment.comment}}</p>
+                                <p>Commented on {{comment.time}}</p>
+                                
                             </div>
                         </div>
                     </div>

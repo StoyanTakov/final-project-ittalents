@@ -17,10 +17,10 @@ var VideoSchema = new Schema({
         unique: false
     },
     publishInfo: {
-        // time: {
-        //     type: String,
-        //     required: true
-        // },
+        time: {
+            type: String,
+            required: true
+        },
         categories:{
             type: String,
             required: true
@@ -44,9 +44,9 @@ var VideoSchema = new Schema({
         },
 
     },
-    // comments:{
-    //     type: String,
-    // }
+    comments:{
+        type: Array,
+    }
 });
 
 module.exports = mongoose.model("Video", VideoSchema);
