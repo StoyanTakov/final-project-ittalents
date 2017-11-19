@@ -259,20 +259,7 @@ module.exports = function (router) {
             }
         })
     })
-    //     //API for searching videos
-    //     router.get('/searchVideos/:title', function (req, res) {
-    //         Video.find({
-    //             title: {
-    //                 $regex: /req.params.title/i
-    //             }
-    //         }).exec(function (err, videos) {
-    //             console.log(videos)
-    //             if (videos !== null) {
-    //                 res.send(videos);
-    //             }
-    //         })
-    //     })
-    // })
+
     // Getting the uploaded videos by the logged in user
     router.get('/ownVideos', function (req, res) {
         if (req.decoded) {
@@ -331,7 +318,9 @@ module.exports = function (router) {
                                     video.publishInfo.likes--;
                                     var videoIndex = user.likedVideos.findIndex(likedVid => likedVid._id.toString() == video._id.toString());
                                     user.likedVideos.splice(videoIndex, 1);
-                                    User.update({_id: user._id},user,function (err,raw) {
+                                    User.update({
+                                        _id: user._id
+                                    }, user, function (err, raw) {
                                         if (err) {
                                             console.log(err);
                                         }
@@ -340,7 +329,10 @@ module.exports = function (router) {
                                         if (err) {
                                             console.log(err)
                                         }
-                                        likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes}
+                                        likesAndDislikes = {
+                                            likes: video.publishInfo.likes,
+                                            dislikes: video.publishInfo.dislikes
+                                        }
                                         res.json({
                                             success: true,
                                             message: 'Removed like',
@@ -354,8 +346,10 @@ module.exports = function (router) {
                                         video.publishInfo.dislikes--;
                                         var videoIndex = user.dislikedVideos.findIndex(dislikedVid => dislikedVid._id.toString() == video._id.toString());
                                         user.dislikedVideos.splice(videoIndex, 1);
-                                        user.likedVideos.push(video);
-                                        User.update({_id: user._id},user,function (err,raw) {
+                                        user.likedVideos.unshift(video);
+                                        User.update({
+                                            _id: user._id
+                                        }, user, function (err, raw) {
                                             if (err) {
                                                 console.log(err);
                                             }
@@ -364,7 +358,10 @@ module.exports = function (router) {
                                             if (err) {
                                                 console.log(err)
                                             }
-                                            likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                            likesAndDislikes = {
+                                                likes: video.publishInfo.likes,
+                                                dislikes: video.publishInfo.dislikes
+                                            };
                                             res.json({
                                                 success: true,
                                                 message: 'Liked',
@@ -374,8 +371,10 @@ module.exports = function (router) {
                                     } else {
                                         // If the video isn't liked or disliked
                                         video.publishInfo.likes++;
-                                        user.likedVideos.push(video);
-                                        User.update({_id: user._id},user,function (err,raw) {
+                                        user.likedVideos.unshift(video);
+                                        User.update({
+                                            _id: user._id
+                                        }, user, function (err, raw) {
                                             if (err) {
                                                 console.log(err);
                                             }
@@ -384,7 +383,10 @@ module.exports = function (router) {
                                             if (err) {
                                                 console.log(err)
                                             }
-                                            likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                            likesAndDislikes = {
+                                                likes: video.publishInfo.likes,
+                                                dislikes: video.publishInfo.dislikes
+                                            };
                                             res.json({
                                                 success: true,
                                                 message: 'Liked',
@@ -411,7 +413,7 @@ module.exports = function (router) {
         if (req.decoded) {
             var user = {};
             var video = {};
-            var  likesAndDislikes = {};
+            var likesAndDislikes = {};
             User.findOne({
                 username: req.decoded.username
             }).exec(function (err, foundUser) {
@@ -437,7 +439,9 @@ module.exports = function (router) {
                                     video.publishInfo.dislikes--;
                                     var videoIndex = user.dislikedVideos.findIndex(dislikedVid => dislikedVid._id.toString() == video._id.toString());
                                     user.dislikedVideos.splice(videoIndex, 1);
-                                    User.update({_id: user._id},user,function (err,raw) {
+                                    User.update({
+                                        _id: user._id
+                                    }, user, function (err, raw) {
                                         if (err) {
                                             console.log(err);
                                         }
@@ -446,7 +450,10 @@ module.exports = function (router) {
                                         if (err) {
                                             console.log(err)
                                         }
-                                        likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                        likesAndDislikes = {
+                                            likes: video.publishInfo.likes,
+                                            dislikes: video.publishInfo.dislikes
+                                        };
                                         res.json({
                                             success: true,
                                             message: 'Removed dislike',
@@ -461,7 +468,9 @@ module.exports = function (router) {
                                         var videoIndex = user.likedVideos.findIndex(likedVid => likedVid._id.toString() == video._id.toString());
                                         user.likedVideos.splice(videoIndex, 1);
                                         user.dislikedVideos.push(video);
-                                        User.update({_id: user._id},user,function (err,raw) {
+                                        User.update({
+                                            _id: user._id
+                                        }, user, function (err, raw) {
                                             if (err) {
                                                 console.log(err);
                                             }
@@ -470,7 +479,10 @@ module.exports = function (router) {
                                             if (err) {
                                                 console.log(err)
                                             }
-                                            likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                            likesAndDislikes = {
+                                                likes: video.publishInfo.likes,
+                                                dislikes: video.publishInfo.dislikes
+                                            };
                                             res.json({
                                                 success: true,
                                                 message: 'Disliked',
@@ -481,7 +493,9 @@ module.exports = function (router) {
                                         // If the video isn't liked or disliked
                                         video.publishInfo.dislikes++;
                                         user.dislikedVideos.push(video);
-                                        User.update({_id: user._id},user,function (err,raw) {
+                                        User.update({
+                                            _id: user._id
+                                        }, user, function (err, raw) {
                                             if (err) {
                                                 console.log(err);
                                             }
@@ -490,7 +504,10 @@ module.exports = function (router) {
                                             if (err) {
                                                 console.log(err)
                                             }
-                                            likesAndDislikes = {likes: video.publishInfo.likes, dislikes: video.publishInfo.dislikes};
+                                            likesAndDislikes = {
+                                                likes: video.publishInfo.likes,
+                                                dislikes: video.publishInfo.dislikes
+                                            };
                                             res.json({
                                                 success: true,
                                                 message: 'Disliked',
@@ -513,24 +530,30 @@ module.exports = function (router) {
         }
     })
     // For the views
-    router.get('/views/:id',function (req,res){
+    router.get('/views/:id', function (req, res) {
         var video = {};
-        Video.findOne({_id: req.params.id}).exec(function(err,foundVideo){
+        Video.findOne({
+            _id: req.params.id
+        }).exec(function (err, foundVideo) {
             if (err) {
                 console.log(err);
-            }else{
+            } else {
                 video = foundVideo;
                 video.publishInfo.views++;
                 if (req.decoded) {
                     var user = {};
-                    User.findOne({username: req.decoded.username}).exec(function(err,foundUser){
+                    User.findOne({
+                        username: req.decoded.username
+                    }).exec(function (err, foundUser) {
                         if (err) {
                             console.log(err);
-                        }else{
+                        } else {
                             user = foundUser;
-                            if (user.history.length==0 || (user.history.findIndex(histVid => histVid._id.toString() == video._id.toString())!==user.history[0])) {
+                            if (user.history.length == 0 || (user.history.findIndex(histVid => histVid._id.toString() == video._id.toString()) !== user.history[0])) {
                                 user.history.unshift(video);
-                                User.update({_id:user._id},user,function(err,raw){
+                                User.update({
+                                    _id: user._id
+                                }, user, function (err, raw) {
                                     if (err) {
                                         console.log(err);
                                     }
@@ -539,23 +562,29 @@ module.exports = function (router) {
                         }
                     })
                 }
-                video.save(function(err){
+                video.save(function (err) {
                     if (err) {
                         console.log(err)
-                    }else{
-                        res.json({success: true, message:'Video viewed',views: video.publishInfo.views})
+                    } else {
+                        res.json({
+                            success: true,
+                            message: 'Video viewed',
+                            views: video.publishInfo.views
+                        })
                     }
                 })
             }
         })
     })
     // Uploading comments
-    router.post('/comments/:id',function(req,res){
+    router.post('/comments/:id', function (req, res) {
         if (req.decoded) {
-            Video.findOne({ _id: req.params.id}).exec(function(err,video){
+            Video.findOne({
+                _id: req.params.id
+            }).exec(function (err, video) {
                 if (err) {
                     console.log(err);
-                }else{
+                } else {
                     if (req.body.comment) {
                         var comment = {
                             username: req.decoded.username,
@@ -565,34 +594,55 @@ module.exports = function (router) {
                         if (!video.comments) {
                             video.comments = new Array();
                             video.comments.push(comment)
-                        }else{
+                        } else {
                             video.comments.unshift(comment);
-                            
-                        } 
-                        video.save(function(err){
+
+                        }
+                        video.save(function (err) {
                             if (err) {
                                 console.log(err)
-                            }else{
-                                res.json(video.comments)     
+                            } else {
+                                res.json(video.comments)
                             }
                         });
-                        
+
                     }
                 }
             })
-        }else{
-            res.json({success:false, message: 'Login to comment'})
+        } else {
+            res.json({
+                success: false,
+                message: 'Login to comment'
+            })
         }
     })
 
     // History of the user
-    router.get('/history',function(req,res){
-        if(req.decoded){
-            User.findOne({ email: req.decoded.email}).select('history').exec(function(err,userHistory){
+    router.get('/history', function (req, res) {
+        if (req.decoded) {
+            User.findOne({
+                email: req.decoded.email
+            }).select('history').exec(function (err, userHistory) {
                 if (err) {
                     console.log(err);
-                }else{
-                   res.send(userHistory.history)
+                } else {
+                    res.send(userHistory.history)
+                }
+            })
+        }
+    })
+    // Liked videos of the user
+    router.get('/likedVideos', function (req, res) {
+        if (req.decoded) {
+            User.findOne({
+                email: req.decoded.email
+            }).select('likedVideos').exec(function (err, user) {
+                if (user.likedVideos.length !== 0) {
+                    res.send(user.likedVideos);
+                } else {
+                    res.json({
+                        success: false
+                    });
                 }
             })
         }

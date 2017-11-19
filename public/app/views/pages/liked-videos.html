@@ -1,0 +1,9 @@
+<div class="page-header">
+    <h1>Liked videos</h1>
+    <div class="videos-section">
+        <div ng-repeat="vid in likedVids.videos" class="col-md-3">
+            <p>{{vid.title}}</p>
+            <a ng-href="/video/{{vid.name}}" class='vidImgs'><img src="assets/img/video-img.jpg" class="tumbnail" alt="click video"></a>     
+        </div>
+    </div>
+</div>

@@ -16,6 +16,9 @@ angular.module('videoServices',[])
     videoFactory.getHistory = function(){
         return $http.get('/api/history');
     }
+    videoFactory.getLikedVideos = function(){
+        return $http.get('/api/likedVideos');
+    }
     return videoFactory;
 })
 .factory('VideoDetails',function($http){

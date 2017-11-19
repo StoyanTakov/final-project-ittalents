@@ -72,11 +72,11 @@ angular.module('mainVideoController', ['videoServices'])
                 time: new Date().toJSON().slice(0,10).replace(/-/g,'/')
             }
             VideoDetails.comment(mainVid.video._id,comment).then(function(data){
-                console.log(data.data)
                 if (data.data.success==false) {
                     alert(data.data.message);
                 }else{
                     mainVid.video.comments = data.data;
+                    mainVid.commentInput = '';
                 }
             });
         }

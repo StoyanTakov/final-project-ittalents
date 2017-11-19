@@ -15,8 +15,13 @@ var app = angular.module('appRoutes', ['ngRoute'])
                 controller: 'historyController',
                 controllerAs: 'history'
                 // authenticated: true
-            }
-        )
+            })
+            .when('/likedVideos',{
+                templateUrl: 'app/views/pages/liked-videos.html',
+                controller: 'likedVideosController',
+                controllerAs: 'likedVids'
+                // authenticated: true
+            })
             .when('/video/:name', {
                 templateUrl: 'app/views/pages/video-page.html',
                 controller: "mainVideoController",
